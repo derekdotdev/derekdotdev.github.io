@@ -5,21 +5,21 @@ import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data/projects";
 
 const title = "Derek DiLeo — Android & Software Engineer";
-const description = "Android and software engineer building thoughtful, reliable products across mobile, backend, and connected systems.";
+const description = "L3 Android software engineer and UI architecture owner building maintainable applications with Kotlin, Jetpack Compose, MVI, and native C++ integration.";
 ---
 
 <BaseLayout title={title} description={description}>
   <main id="top">
     <section class="hero container">
       <div class="hero__content" data-reveal>
-        <p class="availability"><span></span> Android engineer · Open to what’s next</p>
+        <p class="availability"><span></span> L3 Software Engineer · UI architecture owner</p>
         <h1>
           <span>I build software</span>
           <span>that feels</span>
           <span><em>considered.</em></span>
         </h1>
         <p class="hero__lede">
-          I’m Derek, a software engineer focused on Android and mobile experiences—turning complex problems into reliable, human-centered products.
+          I’m Derek, an Android engineer who defines scalable UI patterns and builds maintainable applications from Compose through the data layer.
         </p>
         <div class="hero__actions">
           <a class="button button--primary" href="#work">Explore my work <Icon name="arrow" /></a>
@@ -34,10 +34,10 @@ const description = "Android and software engineer building thoughtful, reliable
           <div class="device-card__top"><span></span><span></span></div>
           <div class="device-card__screen">
             <p class="code-label">CURRENT_FOCUS</p>
-            <p class="code-value">Android / Mobile</p>
+            <p class="code-value">UI Architecture</p>
             <div class="code-rule"></div>
             <p class="code-label">BUILDING_WITH</p>
-            <div class="code-pills"><span>Kotlin</span><span>Compose</span><span>Java</span></div>
+            <div class="code-pills"><span>Kotlin</span><span>Compose</span><span>C++ / JNI</span></div>
             <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           </div>
         </div>
@@ -54,16 +54,16 @@ const description = "Android and software engineer building thoughtful, reliable
       <div class="about-grid">
         <div class="about-copy" data-reveal>
           <p class="about-copy__lead">
-            I care about the invisible details—the decisions that make software intuitive, resilient, and genuinely useful.
+            I build Android systems that remain understandable, testable, and adaptable as products grow.
           </p>
           <p>
-            My path through entertainment, audio engineering, and telecommunications shaped how I approach software: listen closely, understand the system, and sweat the experience. Today I bring that perspective to mobile development and the services behind it.
+            As an L3 Software Engineer and UI architecture owner, I establish scalable patterns with Jetpack Compose, MVI, ViewModels, and Clean Architecture. I maintain clear, dependency-inverted boundaries from the UI and domain layers through Room persistence and JNI-backed C++ integration in the data layer.
           </p>
         </div>
         <div class="principles" data-reveal>
-          <article><span>01</span><div><h3>Product-minded</h3><p>Start with the person and the outcome, then choose the technology.</p></div></article>
-          <article><span>02</span><div><h3>Systems-aware</h3><p>Think beyond the screen—from data and reliability to the way every piece connects.</p></div></article>
-          <article><span>03</span><div><h3>Always refining</h3><p>Good software comes from curiosity, feedback, and care for the final ten percent.</p></div></article>
+          <article><span>01</span><div><h3>Architecture owner</h3><p>Define UI conventions and boundaries that keep Compose features consistent as the application evolves.</p></div></article>
+          <article><span>02</span><div><h3>Loosely coupled</h3><p>Use domain interfaces, dependency inversion, and Hilt to keep responsibilities explicit and replaceable.</p></div></article>
+          <article><span>03</span><div><h3>Built to last</h3><p>Apply SOLID principles, clean code, and focused tests to make change safer over the long term.</p></div></article>
         </div>
       </div>
     </section>
@@ -83,13 +83,14 @@ const description = "Android and software engineer building thoughtful, reliable
         <div class="capabilities__intro">
           <p class="eyebrow">How I build</p>
           <h2>Mobile first.<br />Systems fluent.</h2>
-          <p>I’m at home in the Android ecosystem, with the broader engineering range to understand what happens on both sides of the API.</p>
+          <p>I work across the Android application stack, treating architecture as a practical tool for making product development safer and more predictable.</p>
         </div>
         <div class="capability-grid">
-          <article><span>01</span><h3>Android</h3><p>Kotlin, Jetpack Compose, architecture, lifecycle-aware UI, and native platform thinking.</p></article>
-          <article><span>02</span><h3>Mobile</h3><p>Cross-platform product work with Flutter, Firebase, state management, and analytics.</p></article>
-          <article><span>03</span><h3>Backend</h3><p>Java, Spring Boot, RESTful services, persistence, authentication, and relational data.</p></article>
-          <article><span>04</span><h3>Craft</h3><p>Accessible interfaces, thoughtful interaction, clear communication, and pragmatic delivery.</p></article>
+          <article><span>01</span><h3>UI Architecture</h3><p>Translate product designs into reusable, themed Material 3 components and establish consistent Compose and MVI state patterns across the application.</p></article>
+          <article><span>02</span><h3>App Architecture</h3><p>Clean Architecture, SOLID principles, domain interfaces, dependency inversion, and Hilt.</p></article>
+          <article><span>03</span><h3>Platform & Data</h3><p>Design lifecycle-aware foreground services for reliable long-running work under Android’s background-execution constraints, with Room persistence and bounded JNI/C++ integration.</p></article>
+          <article><span>04</span><h3>Testing & Quality</h3><p>Build confidence with pure Kotlin unit tests, instrumented tests, and automated Jetpack Compose UI tests using JUnit and AssertK.</p></article>
+          <p class="capability-grid__additional"><span>Additional experience</span> Working knowledge of Kotlin Multiplatform and shared cross-platform architecture.</p>
         </div>
       </div>
     </section>
