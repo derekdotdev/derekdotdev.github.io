@@ -20,7 +20,6 @@ export const projects: Project[] = [
     imageAlt: "Request Live Music mobile application screens",
     stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     github: "https://github.com/derekdotdev/request-live-mobile",
-    preview: "https://vimeo.com/708658225",
     featured: true,
   },
   {
