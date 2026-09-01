@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+
+const title = "Derek DiLeo — Android & Software Engineer";
+const description = "Android and software engineer building thoughtful, reliable products across mobile, backend, and connected systems.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="top">
+    <section class="hero container">
+      <div class="hero__content" data-reveal>
+        <p class="availability"><span></span> Android engineer · Open to what’s next</p>
+        <h1>I build software that feels <em>considered.</em></h1>
+        <p class="hero__lede">
+          I’m Derek, a software engineer focused on Android and mobile experiences—turning complex problems into reliable, human-centered products.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#work">Explore my work <Icon name="arrow" /></a>
+          <a class="button button--ghost" href="/derek-dileo-resume.pdf" download>
+            <Icon name="download" /> Download résumé
+          </a>
+        </div>
+      </div>
+      <div class="hero__aside" data-reveal>
+        <div class="device-card">
+          <div class="device-card__glow"></div>
+          <div class="device-card__top"><span></span><span></span></div>
+          <div class="device-card__screen">
+            <p class="code-label">CURRENT_FOCUS</p>
+            <p class="code-value">Android / Mobile</p>
+            <div class="code-rule"></div>
+            <p class="code-label">BUILDING_WITH</p>
+            <div class="code-pills"><span>Kotlin</span><span>Compose</span><span>Java</span></div>
+            <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <p class="hero__aside-note"><span>01</span> Engineering with product instinct</p>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="Scroll to about section"><span></span> Scroll to explore</a>
+    </section>
+
+    <section id="about" class="section container">
+      <div class="section-heading" data-reveal>
+        <p class="eyebrow">A little context</p>
+        <h2>More than screens and syntax.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy" data-reveal>
+          <p class="about-copy__lead">
+            I care about the invisible details—the decisions that make software intuitive, resilient, and genuinely useful.
+          </p>
+          <p>
+            My path through entertainment, audio engineering, and telecommunications shaped how I approach software: listen closely, understand the system, and sweat the experience. Today I bring that perspective to mobile development and the services behind it.
+          </p>
+        </div>
+        <div class="principles" data-reveal>
+          <article><span>01</span><div><h3>Product-minded</h3><p>Start with the person and the outcome, then choose the technology.</p></div></article>
+          <article><span>02</span><div><h3>Systems-aware</h3><p>Think beyond the screen—from data and reliability to the way every piece connects.</p></div></article>
+          <article><span>03</span><div><h3>Always refining</h3><p>Good software comes from curiosity, feedback, and care for the final ten percent.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section section--work container">
+      <div class="section-heading section-heading--split" data-reveal>
+        <div><p class="eyebrow">Selected work</p><h2>Ideas made tangible.</h2></div>
+        <p>A selection of mobile, backend, embedded, and civic projects built to explore real problems.</p>
+      </div>
+      <div class="project-list">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      </div>
+    </section>
+
+    <section class="section container">
+      <div class="capabilities" data-reveal>
+        <div class="capabilities__intro">
+          <p class="eyebrow">How I build</p>
+          <h2>Mobile first.<br />Systems fluent.</h2>
+          <p>I’m at home in the Android ecosystem, with the broader engineering range to understand what happens on both sides of the API.</p>
+        </div>
+        <div class="capability-grid">
+          <article><span>01</span><h3>Android</h3><p>Kotlin, Jetpack Compose, architecture, lifecycle-aware UI, and native platform thinking.</p></article>
+          <article><span>02</span><h3>Mobile</h3><p>Cross-platform product work with Flutter, Firebase, state management, and analytics.</p></article>
+          <article><span>03</span><h3>Backend</h3><p>Java, Spring Boot, RESTful services, persistence, authentication, and relational data.</p></article>
+          <article><span>04</span><h3>Craft</h3><p>Accessible interfaces, thoughtful interaction, clear communication, and pragmatic delivery.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact container" data-reveal>
+      <div class="contact__panel">
+        <p class="eyebrow">Let’s connect</p>
+        <h2>Have an interesting problem?</h2>
+        <p>I’m always open to meeting good people and hearing about thoughtful products, especially in the Android and mobile space.</p>
+        <div class="contact__actions">
+          <a class="button button--primary" href="mailto:derekfdileo@gmail.com"><Icon name="mail" /> Send an email</a>
+          <a class="button button--ghost" href="/derek-dileo-resume.pdf" download><Icon name="download" /> Résumé</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>Designed and built by Derek DiLeo <span>·</span> <span id="year"></span></p>
+    <div><a href="https://github.com/derekdotdev" target="_blank" rel="noreferrer"><Icon name="github" /> GitHub</a><a href="https://www.linkedin.com/in/derek-dileo" target="_blank" rel="noreferrer"><Icon name="linkedin" /> LinkedIn</a></div>
+  </footer>
+
+  <script>document.querySelector("#year")!.textContent = String(new Date().getFullYear());</script>
+</BaseLayout>

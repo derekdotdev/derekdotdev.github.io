@@ -1,0 +1,92 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<header class="nav-shell">
+  <nav class="nav container" aria-label="Main navigation">
+    <a class="brand" href="#top" aria-label="Derek DiLeo, back to top">
+      <span class="brand__mark">DD</span>
+      <span>Derek DiLeo</span>
+    </a>
+    <div class="nav__links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="nav__github" href="https://github.com/derekdotdev" target="_blank" rel="noreferrer">
+      <Icon name="github" size={18} />
+      <span>GitHub</span>
+    </a>
+  </nav>
+</header>
+
+<style>
+  .nav-shell {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 20;
+    border-bottom: 1px solid transparent;
+    transition: background 180ms ease, border-color 180ms ease;
+  }
+
+  .nav-shell.is-scrolled {
+    background: rgba(7, 9, 14, 0.78);
+    border-color: var(--line);
+    backdrop-filter: blur(18px);
+  }
+
+  .nav {
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand, .nav__github {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: var(--text);
+    font-weight: 650;
+  }
+
+  .brand__mark {
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1px solid rgba(139, 118, 255, 0.5);
+    border-radius: 0.7rem;
+    background: linear-gradient(145deg, rgba(139, 118, 255, 0.2), rgba(0, 217, 166, 0.08));
+    color: var(--accent-soft);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+  }
+
+  .nav__links { display: flex; gap: clamp(1.2rem, 3vw, 2.5rem); }
+  .nav__links a { color: var(--muted); font-size: 0.9rem; transition: color 160ms ease; }
+  .nav__links a:hover { color: var(--text); }
+
+  .nav__github {
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 0.62rem 1rem;
+    font-size: 0.84rem;
+    transition: border-color 160ms ease, background 160ms ease;
+  }
+  .nav__github:hover { border-color: rgba(139,118,255,.55); background: rgba(139,118,255,.08); }
+
+  @media (max-width: 640px) {
+    .nav { height: 66px; }
+    .nav__links { display: none; }
+    .nav__github span { display: none; }
+    .nav__github { padding: .62rem; }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector(".nav-shell");
+  const updateNav = () => nav?.classList.toggle("is-scrolled", window.scrollY > 16);
+  updateNav();
+  window.addEventListener("scroll", updateNav, { passive: true });
+</script>

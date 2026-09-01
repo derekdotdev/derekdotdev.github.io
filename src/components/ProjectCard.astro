@@ -1,0 +1,96 @@
+---
+import type { Project } from "../data/projects";
+import Icon from "./Icon.astro";
+
+interface Props { project: Project; index: number; }
+const { project, index } = Astro.props;
+---
+
+<article class:list={["project-card", { "project-card--featured": project.featured }]} data-reveal>
+  <div class="project-card__media">
+    <img src={project.image} alt={project.imageAlt} loading={index > 1 ? "lazy" : "eager"} />
+    <span class="project-card__number">0{index + 1}</span>
+  </div>
+  <div class="project-card__body">
+    <p class="eyebrow">{project.eyebrow}</p>
+    <h3>{project.title}</h3>
+    <p class="project-card__description">{project.description}</p>
+    <ul class="tags" aria-label="Technologies">
+      {project.stack.map((technology) => <li>{technology}</li>)}
+    </ul>
+    <div class="project-card__links">
+      <a href={project.github} target="_blank" rel="noreferrer">
+        <Icon name="github" size={18} /> Source <Icon name="arrow" size={16} />
+      </a>
+      {project.preview && (
+        <a class="secondary-link" href={project.preview} target="_blank" rel="noreferrer">
+          <Icon name="play" size={18} /> Preview
+        </a>
+      )}
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(19rem, .95fr);
+    overflow: hidden;
+    min-height: 31rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(145deg, rgba(19, 22, 31, .92), rgba(12, 14, 21, .78));
+    box-shadow: 0 28px 80px rgba(0,0,0,.18);
+    transition: transform 260ms ease, border-color 260ms ease;
+  }
+
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(139,118,255,.32); }
+  .project-card:nth-child(even) .project-card__media { order: 2; }
+
+  .project-card__media {
+    position: relative;
+    min-height: 27rem;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(139,118,255,.13), rgba(0,217,166,.06));
+  }
+
+  .project-card__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    pointer-events: none;
+  }
+
+  .project-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(.8) contrast(1.03);
+    transition: transform 600ms cubic-bezier(.2,.7,.2,1), filter 300ms ease;
+  }
+
+  .project-card:hover img { transform: scale(1.025); filter: saturate(1) contrast(1.03); }
+  .project-card__number { position: absolute; top: 1.2rem; left: 1.2rem; padding: .5rem .65rem; border: 1px solid rgba(255,255,255,.15); border-radius: 999px; background: rgba(7,9,14,.55); backdrop-filter: blur(12px); font: 600 .7rem/1 var(--font-mono); color: rgba(255,255,255,.78); }
+  .project-card__body { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem, 5vw, 4.6rem); }
+  h3 { max-width: 11ch; margin: .75rem 0 1rem; font-size: clamp(2rem, 4vw, 3.3rem); line-height: .98; letter-spacing: -.05em; }
+  .project-card__description { color: var(--muted); line-height: 1.75; }
+  .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.6rem 0 2rem; padding: 0; list-style: none; }
+  .tags li { padding: .44rem .65rem; border: 1px solid var(--line); border-radius: .5rem; color: var(--muted-bright); font: 500 .7rem/1 var(--font-mono); }
+  .project-card__links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .project-card__links a { display: inline-flex; align-items: center; gap: .55rem; color: var(--text); font-size: .85rem; font-weight: 650; }
+  .project-card__links a svg:last-child { transition: transform 150ms ease; }
+  .project-card__links a:hover svg:last-child { transform: translateX(3px); }
+  .project-card__links .secondary-link { color: var(--muted-bright); }
+
+  @media (max-width: 800px) {
+    .project-card { grid-template-columns: 1fr; min-height: 0; }
+    .project-card:nth-child(even) .project-card__media { order: 0; }
+    .project-card__media { min-height: 18rem; aspect-ratio: 4 / 3; }
+    .project-card__body { padding: 2rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-card, .project-card__media img { transition: none; }
+  }
+</style>
