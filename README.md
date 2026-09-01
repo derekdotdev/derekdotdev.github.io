@@ -29,6 +29,6 @@ The production output is generated in `dist/`.
 - Project data: `src/data/projects.ts`
 - Components: `src/components/`
 - Global styles and design tokens: `src/styles/global.css`
-- Static files, including the résumé: `public/`
+- Static files, including the resume: `public/`
 
 The previous Jekyll implementation remains in the repository temporarily while the new site is reviewed.
