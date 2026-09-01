@@ -46,36 +46,4 @@ export const projects: Project[] = [
     github: "https://github.com/derekdotdev/cat-tracker",
     preview: "https://vimeo.com/718704776",
   },
-  {
-    title: "Expense Tracker API",
-    eyebrow: "Backend system",
-    description:
-      "A secure REST API for managing expenses, designed around clear CRUD workflows, persistent relational data, and token-based authentication.",
-    image: "/img/portfolio/expense-tracker.png",
-    imageAlt: "Expense Tracker API documentation",
-    stack: ["Java", "Spring Boot", "JPA", "JWT"],
-    github: "https://github.com/derekdotdev/expense-tracker-rest-api",
-  },
-  {
-    title: "Dart Todo List",
-    eyebrow: "Cross-platform app",
-    description:
-      "A focused task-management application exploring application state, authentication, data persistence, and consistent interactions across mobile and web.",
-    image: "/img/portfolio/todo-list-main.png",
-    imageAlt: "Dart Todo List application screens",
-    stack: ["Flutter", "Dart", "Provider", "Firebase"],
-    github: "https://github.com/derekdotdev/TodoList-Flutter",
-    preview: "https://vimeo.com/723338757",
-  },
-  {
-    title: "Word Frequency Counter",
-    eyebrow: "Desktop utility",
-    description:
-      "A JavaFX tool that extracts text from a selected webpage region, analyzes word frequency, and presents ranked results in a desktop interface.",
-    image: "/img/portfolio/word-frequency-analyzer.png",
-    imageAlt: "Word Frequency Counter desktop interface",
-    stack: ["Java", "JavaFX", "Regex", "MySQL"],
-    github: "https://github.com/derekdotdev/JavaFX-Word-Frequency-Counter",
-    preview: "https://vimeo.com/636527956",
-  },
 ];
