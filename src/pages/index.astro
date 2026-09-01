@@ -1,0 +1,148 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+import resumeUrl from "../assets/derek-dileo-resume.pdf?url";
+
+const title = "Derek DiLeo — Android & Software Engineer";
+const description = "L3 Android software engineer and UI architecture owner building maintainable applications with Kotlin, Jetpack Compose, MVI, and native C++ integration.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="top">
+    <section class="hero container">
+      <div class="hero__content">
+        <p class="availability"><span></span> Android engineer · Clean architecture, polished experiences</p>
+        <h1>
+          <span>I build software</span>
+          <span>that feels</span>
+          <span><em>considered.</em></span>
+        </h1>
+        <p class="hero__lede">
+          I’m Derek, an Android engineer who defines scalable UI patterns and builds maintainable applications from Compose through the data layer.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#work">Explore my work <Icon name="arrow" /></a>
+          <a class="button button--ghost" href={resumeUrl} download="derek-dileo-resume.pdf">
+            <Icon name="download" /> Download resume
+          </a>
+        </div>
+      </div>
+      <div class="hero__aside">
+        <div class="device-card">
+          <div class="device-card__glow"></div>
+          <div class="device-card__top"><span></span><span></span></div>
+          <div class="device-card__screen">
+            <p class="code-label">CURRENT_FOCUS</p>
+            <p class="code-value">UI Architecture</p>
+            <div class="code-rule"></div>
+            <p class="code-label">BUILDING_WITH</p>
+            <div class="code-pills"><span>Kotlin</span><span>Compose</span><span>C++ / JNI</span></div>
+            <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <p class="hero__aside-note"><span>01</span> Engineering with product instinct</p>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="Scroll to about section"><span></span> Scroll to explore</a>
+    </section>
+
+    <section class="section container">
+      <div id="about" class="section-heading" data-reveal>
+        <p class="eyebrow">A little context</p>
+        <h2>More than screens and syntax.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-copy" data-reveal>
+          <p class="about-copy__lead">
+            I build Android systems that remain understandable, testable, and adaptable as products grow.
+          </p>
+          <p>
+            As an L3 Software Engineer and UI architecture owner, I establish scalable patterns with Jetpack Compose, MVI, ViewModels, and Clean Architecture. I maintain clear, dependency-inverted boundaries from the UI and domain layers through Room persistence and JNI-backed C++ integration in the data layer.
+          </p>
+        </div>
+        <div class="principles" data-reveal>
+          <article><span>01</span><div><h3>Architecture owner</h3><p>Define UI conventions and boundaries that keep Compose features consistent as the application evolves.</p></div></article>
+          <article><span>02</span><div><h3>Loosely coupled</h3><p>Use domain interfaces, dependency inversion, and Hilt to keep responsibilities explicit and replaceable.</p></div></article>
+          <article><span>03</span><div><h3>Built to last</h3><p>Apply SOLID principles, clean code, and focused tests to make change safer over the long term.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container">
+      <div id="work" class="section-heading section-heading--split" data-reveal>
+        <div><p class="eyebrow">Professional impact</p><h2>Architecture in motion.</h2></div>
+        <p>Production work where better structure translated into simpler workflows, safer changes, and more capable Android systems.</p>
+      </div>
+      <div class="impact-grid">
+        <article data-reveal>
+          <div class="impact-card__meta"><span>01</span><span>Android modernization</span></div>
+          <h3>Modernized application architecture.</h3>
+          <p>Led the transition from imperative Java and observer-based patterns to Jetpack Compose, MVI, Clean Architecture, Hilt, and layered automated testing.</p>
+          <ul><li>Reusable UI patterns</li><li>Dependency-inverted boundaries</li><li>Testable state</li></ul>
+        </article>
+        <article data-reveal>
+          <div class="impact-card__meta"><span>02</span><span>Workflow automation</span></div>
+          <h3>Simplified hardware integration.</h3>
+          <p>Architected operator-facing Android workflows that replaced manual, CLI-driven vehicle and radio pairing with dynamic discovery and automated configuration.</p>
+          <ul><li>Lower operational complexity</li><li>Dynamic configuration</li><li>Operator-first UX</li></ul>
+        </article>
+        <article data-reveal>
+          <div class="impact-card__meta"><span>03</span><span>Native interoperability</span></div>
+          <h3>Connected Android to native systems.</h3>
+          <p>Designed bounded JNI integrations that expose existing C++ capabilities through maintainable Android data-layer interfaces.</p>
+          <ul><li>JNI / C++</li><li>Data-layer isolation</li><li>Stable domain contracts</li></ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section--work container">
+      <div class="section-heading section-heading--split" data-reveal>
+        <div><p class="eyebrow">Selected work</p><h2>Ideas made tangible.</h2></div>
+        <p>A selection of mobile, backend, embedded, and civic projects built to explore real problems.</p>
+      </div>
+      <div class="project-list">
+        {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+      </div>
+    </section>
+
+    <section class="section container">
+      <div id="approach" class="section-heading section-heading--split" data-reveal>
+        <div><p class="eyebrow">Engineering approach</p><h2>Built for change.</h2></div>
+        <p>Architecture should make product development safer and more predictable while increasing developer velocity—not add ceremony for its own sake.</p>
+      </div>
+      <div class="capabilities" data-reveal>
+        <div class="capabilities__intro">
+          <h2>Mobile first.<br />Systems fluent.</h2>
+          <p>I work across the Android application stack, creating clear boundaries and reusable patterns that help engineers ship confidently and move faster.</p>
+        </div>
+        <div class="capability-grid">
+          <article><span>01</span><h3>UI Architecture</h3><p>Translate product designs into reusable, themed Material 3 components and establish consistent Compose and MVI state patterns across the application.</p></article>
+          <article><span>02</span><h3>App Architecture</h3><p>Clean Architecture, SOLID principles, domain interfaces, dependency inversion, and Hilt.</p></article>
+          <article><span>03</span><h3>Platform & Data</h3><p>Design lifecycle-aware foreground services for reliable long-running work under Android’s background-execution constraints, with Room persistence and bounded JNI/C++ integration.</p></article>
+          <article><span>04</span><h3>Testing & Quality</h3><p>Build confidence with pure Kotlin unit tests, Flow testing with Turbine, instrumented tests, and automated Jetpack Compose UI tests using JUnit and AssertK.</p></article>
+          <p class="capability-grid__additional"><span>Additional experience</span> Working knowledge of Kotlin Multiplatform and shared cross-platform architecture.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact container" data-reveal>
+      <div id="contact" class="contact__panel">
+        <p class="eyebrow">Let’s connect</p>
+        <h2>Have an interesting problem?</h2>
+        <p>Looking for an Android engineer who cares about architecture and craft? Let’s talk.</p>
+        <div class="contact__actions">
+          <a class="button button--primary" href="mailto:derekfdileo@gmail.com"><Icon name="mail" /> Send an email</a>
+          <a class="button button--ghost" href={resumeUrl} download="derek-dileo-resume.pdf"><Icon name="download" /> Resume</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer container">
+    <p>Designed and built by Derek DiLeo <span>·</span> <span id="year"></span></p>
+    <div><a href="https://github.com/derekdotdev" target="_blank" rel="noreferrer"><Icon name="github" /> GitHub</a><a href="https://www.linkedin.com/in/derek-dileo" target="_blank" rel="noreferrer"><Icon name="linkedin" /> LinkedIn</a></div>
+  </footer>
+
+  <script>document.querySelector("#year")!.textContent = String(new Date().getFullYear());</script>
+</BaseLayout>
