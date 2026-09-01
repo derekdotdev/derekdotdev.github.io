@@ -9,9 +9,9 @@ import Icon from "./Icon.astro";
       <span>Derek DiLeo</span>
     </a>
     <div class="nav__links">
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" data-section-link="about">About</a>
+      <a href="#work" data-section-link="work">Work</a>
+      <a href="#contact" data-section-link="contact">Contact</a>
     </div>
     <a class="nav__github" href="https://github.com/derekdotdev" target="_blank" rel="noreferrer">
       <Icon name="github" size={18} />
@@ -64,8 +64,32 @@ import Icon from "./Icon.astro";
   }
 
   .nav__links { display: flex; gap: clamp(1.2rem, 3vw, 2.5rem); }
-  .nav__links a { color: var(--muted); font-size: 0.9rem; transition: color 160ms ease; }
+  .nav__links a {
+    position: relative;
+    padding: 0.55rem 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    transition: color 180ms ease;
+  }
+
+  .nav__links a::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0.2rem;
+    left: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--mint));
+    box-shadow: 0 0 12px rgba(139, 118, 255, 0.35);
+    opacity: 0;
+    transform: scaleX(0.35);
+    transition: opacity 180ms ease, transform 220ms cubic-bezier(.2, .7, .2, 1);
+  }
+
   .nav__links a:hover { color: var(--text); }
+  .nav__links a.is-active { color: var(--text); }
+  .nav__links a.is-active::after { opacity: 1; transform: scaleX(1); }
 
   .nav__github {
     border: 1px solid var(--line-strong);
@@ -86,7 +110,38 @@ import Icon from "./Icon.astro";
 
 <script>
   const nav = document.querySelector(".nav-shell");
-  const updateNav = () => nav?.classList.toggle("is-scrolled", window.scrollY > 16);
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"));
+  const sections = links
+    .map((link) => document.querySelector<HTMLElement>(`#${link.dataset.sectionLink}`))
+    .filter((section): section is HTMLElement => section !== null);
+
+  const setActiveSection = (id?: string) => {
+    links.forEach((link) => {
+      const isActive = link.dataset.sectionLink === id;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  let framePending = false;
+  const updateNav = () => {
+    nav?.classList.toggle("is-scrolled", window.scrollY > 16);
+
+    const readingPosition = window.scrollY + window.innerHeight * 0.38;
+    const current = sections.findLast((section) => section.offsetTop <= readingPosition);
+    const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+    setActiveSection(atPageEnd ? sections.at(-1)?.id : current?.id);
+    framePending = false;
+  };
+
+  const requestUpdate = () => {
+    if (framePending) return;
+    framePending = true;
+    window.requestAnimationFrame(updateNav);
+  };
+
   updateNav();
-  window.addEventListener("scroll", updateNav, { passive: true });
+  window.addEventListener("scroll", requestUpdate, { passive: true });
+  window.addEventListener("resize", requestUpdate, { passive: true });
 </script>
