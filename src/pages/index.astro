@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { projects } from "../data/projects";
+import resumeUrl from "../assets/derek-dileo-resume.pdf?url";
 
 const title = "Derek DiLeo — Android & Software Engineer";
 const description = "L3 Android software engineer and UI architecture owner building maintainable applications with Kotlin, Jetpack Compose, MVI, and native C++ integration.";
@@ -23,7 +24,7 @@ const description = "L3 Android software engineer and UI architecture owner buil
         </p>
         <div class="hero__actions">
           <a class="button button--primary" href="#work">Explore my work <Icon name="arrow" /></a>
-          <a class="button button--ghost" href="/derek-dileo-resume.pdf" download>
+          <a class="button button--ghost" href={resumeUrl} download="derek-dileo-resume.pdf">
             <Icon name="download" /> Download resume
           </a>
         </div>
@@ -102,7 +103,7 @@ const description = "L3 Android software engineer and UI architecture owner buil
         <p>I’m always open to meeting good people and hearing about thoughtful products, especially in the Android and mobile space.</p>
         <div class="contact__actions">
           <a class="button button--primary" href="mailto:derekfdileo@gmail.com"><Icon name="mail" /> Send an email</a>
-          <a class="button button--ghost" href="/derek-dileo-resume.pdf" download><Icon name="download" /> Resume</a>
+          <a class="button button--ghost" href={resumeUrl} download="derek-dileo-resume.pdf"><Icon name="download" /> Resume</a>
         </div>
       </div>
     </section>
