@@ -1,6 +1,6 @@
 export const ICON_SIZES = {
-  micro: 14,
-  small: 16,
-  standard: 18,
-  large: 20,
+  xs: 14,
+  sm: 16,
+  md: 18,
+  lg: 20,
 } as const;

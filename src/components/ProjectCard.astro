@@ -33,16 +33,16 @@ const { project, index } = Astro.props;
     </ul>
     <div class="project-card__links">
       <a href={project.github} target="_blank" rel="noreferrer">
-        <Icon name="github" size={ICON_SIZES.standard} /> Source <Icon
+        <Icon name="github" size={ICON_SIZES.md} /> Source <Icon
           name="arrow"
-          size={ICON_SIZES.small}
+          size={ICON_SIZES.sm}
         />
       </a>
       {
         project.caseStudy && (
           <a class="case-study-link" href={project.caseStudy}>
-            <Icon name="article" size={ICON_SIZES.standard} /> Case study
-            <Icon name="arrow" size={ICON_SIZES.small} />
+            <Icon name="article" size={ICON_SIZES.md} /> Case study
+            <Icon name="arrow" size={ICON_SIZES.sm} />
           </a>
         )
       }
@@ -54,7 +54,7 @@ const { project, index } = Astro.props;
             target="_blank"
             rel="noreferrer"
           >
-            <Icon name="play" size={ICON_SIZES.standard} /> Preview
+            <Icon name="play" size={ICON_SIZES.md} /> Preview
           </a>
         )
       }
