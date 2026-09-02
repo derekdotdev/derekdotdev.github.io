@@ -262,7 +262,6 @@ import Icon from "./Icon.astro";
       padding: 0.85rem 1rem;
       border-radius: 0.65rem;
     }
-    .nav__links a:hover,
     .nav__links a.is-active {
       background: var(--color-action-muted);
     }
@@ -277,6 +276,12 @@ import Icon from "./Icon.astro";
     }
     .nav__menu-toggle {
       display: block;
+    }
+  }
+
+  @media (max-width: 640px) and (hover: hover) {
+    .nav__links a:hover {
+      background: var(--color-action-muted);
     }
   }
 </style>

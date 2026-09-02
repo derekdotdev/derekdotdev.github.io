@@ -1,6 +1,14 @@
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+
 type Theme = "dark" | "light";
 
 const TOP_OF_PAGE_THRESHOLD = 16;
+const MIN_SCROLL_DURATION_SECONDS = 0.65;
+const MAX_SCROLL_DURATION_SECONDS = 1;
+const SCROLL_DURATION_PER_PIXEL = 0.00035;
+
+gsap.registerPlugin(ScrollToPlugin);
 
 export function initializeNavigation(): void {
   const navigation = document.querySelector<HTMLElement>(".nav-shell");
@@ -12,6 +20,7 @@ export function initializeNavigation(): void {
 
   initializeThemeToggle();
   initializeMobileMenu(navigation, sectionLinks);
+  initializeAnchorScrolling();
   initializeSectionTracking(navigation, sectionLinks);
 }
 
@@ -111,6 +120,79 @@ function closeMenuOnEscape(
   toggle.focus();
 }
 
+function initializeAnchorScrolling(): void {
+  const anchorLinks =
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]');
+
+  anchorLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const target = getAnchorTarget(link.hash);
+      if (!target || isModifiedClick(event)) return;
+
+      event.preventDefault();
+      scrollToTarget(target, link.hash);
+    });
+  });
+}
+
+function getAnchorTarget(hash: string): HTMLElement | null {
+  if (!hash) return null;
+  return document.querySelector<HTMLElement>(hash);
+}
+
+function isModifiedClick(event: MouseEvent): boolean {
+  return (
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  );
+}
+
+function scrollToTarget(target: HTMLElement, hash: string): void {
+  const destination = getScrollDestination(target);
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.scrollTo(0, destination);
+    updateLocationHash(hash);
+    return;
+  }
+
+  gsap.killTweensOf(window);
+  gsap.to(window, {
+    duration: getScrollDuration(destination - window.scrollY),
+    ease: "power2.inOut",
+    scrollTo: { y: destination, autoKill: true },
+    onComplete: () => updateLocationHash(hash),
+  });
+}
+
+function getScrollDestination(target: HTMLElement): number {
+  const scrollPadding =
+    Number.parseFloat(
+      getComputedStyle(document.documentElement).scrollPaddingTop,
+    ) || 0;
+  const targetTop =
+    target.getBoundingClientRect().top + window.scrollY - scrollPadding;
+  const maximumScroll =
+    document.documentElement.scrollHeight - window.innerHeight;
+  return Math.max(0, Math.min(targetTop, maximumScroll));
+}
+
+function updateLocationHash(hash: string): void {
+  history.pushState(null, "", hash);
+}
+
+function getScrollDuration(distance: number): number {
+  return Math.min(
+    MAX_SCROLL_DURATION_SECONDS,
+    Math.max(
+      MIN_SCROLL_DURATION_SECONDS,
+      Math.abs(distance) * SCROLL_DURATION_PER_PIXEL,
+    ),
+  );
+}
+
 function initializeSectionTracking(
   navigation: HTMLElement,
   sectionLinks: HTMLAnchorElement[],
@@ -157,13 +239,17 @@ function findActiveSection(sections: HTMLElement[]): string | undefined {
 
   const readingPosition = window.scrollY + window.innerHeight * 0.38;
   const currentSection = sections.findLast(
-    (section) => section.offsetTop <= readingPosition,
+    (section) => getDocumentTop(section) <= readingPosition,
   );
   const isAtPageEnd =
     window.innerHeight + window.scrollY >=
     document.documentElement.scrollHeight - 8;
 
   return isAtPageEnd ? sections.at(-1)?.id : currentSection?.id;
+}
+
+function getDocumentTop(element: HTMLElement): number {
+  return element.getBoundingClientRect().top + window.scrollY;
 }
 
 function setActiveSection(
