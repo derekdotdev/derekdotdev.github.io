@@ -39,7 +39,7 @@ export const projects: Project[] = [
     eyebrow: "Embedded experiment",
     description:
       "An Arduino data-collection system that measures a pet’s response time at mealtime using sound and motion sensors, timestamps each event, and exports the results for analysis.",
-    image: "/img/portfolio/cat-tracker.png",
+    image: "/img/portfolio/cat-tracker.webp",
     imageAlt: "Cat Tracker hardware and data visualization",
     stack: ["Arduino", "C++", "Sensors", "Data logging"],
     github: "https://github.com/derekdotdev/cat-tracker",
