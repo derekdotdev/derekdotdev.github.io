@@ -236,7 +236,7 @@ import Icon from "./Icon.astro";
 
     const readingPosition = window.scrollY + window.innerHeight * 0.38;
     const current = sections.findLast((section) => section.offsetTop <= readingPosition);
-    const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+    const atPageEnd = window.scrollY > 0 && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
     setActiveSection(atPageEnd ? sections.at(-1)?.id : current?.id);
     framePending = false;
   };
@@ -247,7 +247,8 @@ import Icon from "./Icon.astro";
     window.requestAnimationFrame(updateNav);
   };
 
-  updateNav();
+  if (document.readyState === "complete") requestUpdate();
+  else window.addEventListener("load", requestUpdate, { once: true });
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate, { passive: true });
 </script>
