@@ -23,7 +23,7 @@ const socialImage = new URL("/social-preview.png", Astro.site);
         try { savedTheme = localStorage.getItem("theme"); } catch {}
         const theme = savedTheme === "light" || savedTheme === "dark"
           ? savedTheme
-          : window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+          : "dark";
         document.documentElement.dataset.theme = theme;
       })();
     </script>
