@@ -4,7 +4,6 @@ export type Project = {
   description: string;
   image: string;
   lightImage: string;
-  imageFit?: "cover" | "contain";
   imageAlt: string;
   stack: string[];
   github: string;
@@ -26,13 +25,12 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    title: "Youth Homelessness Project",
+    title: "Capstone Project",
     eyebrow: "Civic technology",
     description:
       "A privacy-conscious platform that helps students find relevant local resources while giving authorized city staff tools to understand needs and maintain assistance programs.",
     image: "/img/portfolio/youth-homelessness.webp",
     lightImage: "/img/portfolio/youth-homelessness-light.webp",
-    imageFit: "contain",
     imageAlt: "Youth Homelessness Project resource interface",
     stack: ["Java", "Spring Boot", "Spring Security", "SQL"],
     github: "https://github.com/derekdotdev/YouthHomelessnessProject",

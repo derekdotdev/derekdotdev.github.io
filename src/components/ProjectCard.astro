@@ -13,12 +13,7 @@ const { project, index } = Astro.props;
   class:list={["project-card", { "project-card--featured": project.featured }]}
   data-reveal
 >
-  <div
-    class:list={[
-      "project-card__media",
-      { "project-card__media--contain": project.imageFit === "contain" },
-    ]}
-  >
+  <div class="project-card__media">
     <img
       src={project.image}
       data-dark-src={project.image}
@@ -114,16 +109,9 @@ const { project, index } = Astro.props;
       filter 300ms ease;
   }
 
-  .project-card__media--contain img {
-    object-fit: contain;
-  }
-
   .project-card:hover img {
     transform: scale(1.025);
     filter: saturate(1) contrast(1.03);
-  }
-  .project-card:hover .project-card__media--contain img {
-    transform: none;
   }
   .project-card__number {
     position: absolute;
