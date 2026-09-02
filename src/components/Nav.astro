@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import { ICON_SIZES } from "../data/iconSizes";
 
 const isHomePage = Astro.url.pathname === "/";
 const sectionHref = (section: string) =>
@@ -28,10 +29,10 @@ const sectionHref = (section: string) =>
         title="Switch to light theme"
       >
         <span class="nav__theme-icon nav__theme-icon--sun"
-          ><Icon name="sun" size={18} /></span
+          ><Icon name="sun" size={ICON_SIZES.standard} /></span
         >
         <span class="nav__theme-icon nav__theme-icon--moon"
-          ><Icon name="moon" size={18} /></span
+          ><Icon name="moon" size={ICON_SIZES.standard} /></span
         >
       </button>
       <a
@@ -41,7 +42,7 @@ const sectionHref = (section: string) =>
         rel="noreferrer"
         aria-label="GitHub profile"
       >
-        <Icon name="github" size={18} />
+        <Icon name="github" size={ICON_SIZES.standard} />
         <span>GitHub</span>
       </a>
       <button

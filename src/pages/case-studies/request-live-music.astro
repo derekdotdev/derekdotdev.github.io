@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Icon from "../../components/Icon.astro";
+import { ICON_SIZES } from "../../data/iconSizes";
 
 const title = "Request Live Music — Derek DiLeo";
 const description =
@@ -10,7 +11,7 @@ const description =
 <BaseLayout title={title} description={description}>
   <main class="case-study container" id="top">
     <a class="back-link" href="/#projects">
-      <Icon name="arrow" size={16} /> Back to selected work
+      <Icon name="arrow" size={ICON_SIZES.small} /> Back to selected work
     </a>
 
     <header class="case-study__hero">
@@ -34,7 +35,7 @@ const description =
           target="_blank"
           rel="noreferrer"
         >
-          GitHub <Icon name="arrow" size={14} />
+          GitHub <Icon name="arrow" size={ICON_SIZES.micro} />
         </a>
       </div>
     </header>
