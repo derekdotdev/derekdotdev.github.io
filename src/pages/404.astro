@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Page not found — Derek DiLeo";
+const description =
+  "This page is not available, but Derek’s Android engineering portfolio is.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main id="top" class="not-found container">
+    <p class="eyebrow">404 · Off the map</p>
+    <h1>Nothing to see here.</h1>
+    <p>
+      The link may be outdated or the page may have moved. The useful stuff is
+      still right where it belongs.
+    </p>
+    <a class="button button--primary" href="/">
+      Back to the portfolio
+      <span aria-hidden="true">→</span>
+    </a>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 8rem;
+    padding-bottom: 5rem;
+  }
+
+  h1 {
+    max-width: 10ch;
+    margin: 1rem 0 1.5rem;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+
+  .not-found > p:not(.eyebrow) {
+    max-width: 30rem;
+    margin: 0 0 2rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .button span {
+    font-size: 1.25em;
+    line-height: 0;
+  }
+</style>
