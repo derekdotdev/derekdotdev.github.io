@@ -1,7 +1,6 @@
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-type Theme = "dark" | "light";
+import { initializeThemeToggle } from "./theme";
 
 const TOP_OF_PAGE_THRESHOLD = 16;
 const MIN_SCROLL_DURATION_SECONDS = 0.65;
@@ -22,67 +21,6 @@ export function initializeNavigation(): void {
   initializeMobileMenu(navigation, sectionLinks);
   initializeAnchorScrolling();
   initializeSectionTracking(navigation, sectionLinks);
-}
-
-function initializeThemeToggle(): void {
-  const toggle =
-    document.querySelector<HTMLButtonElement>(".nav__theme-toggle");
-  const themeColor = document.querySelector<HTMLMetaElement>("#theme-color");
-  if (!toggle) return;
-
-  applyTheme(toggle, themeColor, getCurrentTheme());
-  toggle.addEventListener("click", () => {
-    const theme = getCurrentTheme() === "dark" ? "light" : "dark";
-    document.documentElement.dataset.theme = theme;
-    saveTheme(theme);
-    applyTheme(toggle, themeColor, theme);
-  });
-}
-
-function applyTheme(
-  toggle: HTMLButtonElement,
-  themeColor: HTMLMetaElement | null,
-  theme: Theme,
-): void {
-  updateThemeControls(toggle, themeColor, theme);
-  updateProjectImages(theme);
-}
-
-function getCurrentTheme(): Theme {
-  return document.documentElement.dataset.theme === "light" ? "light" : "dark";
-}
-
-function saveTheme(theme: Theme): void {
-  try {
-    localStorage.setItem("theme", theme);
-  } catch {
-    // The selected theme still applies when storage is unavailable.
-  }
-}
-
-function updateThemeControls(
-  toggle: HTMLButtonElement,
-  themeColor: HTMLMetaElement | null,
-  theme: Theme,
-): void {
-  const nextTheme = theme === "dark" ? "light" : "dark";
-  const label = `Switch to ${nextTheme} theme`;
-
-  toggle.setAttribute("aria-label", label);
-  toggle.setAttribute("title", label);
-  themeColor?.setAttribute("content", theme === "dark" ? "#080a0d" : "#f4f7f5");
-}
-
-function updateProjectImages(theme: Theme): void {
-  const images = document.querySelectorAll<HTMLImageElement>(
-    "[data-dark-src][data-light-src]",
-  );
-
-  images.forEach((image) => {
-    const source =
-      theme === "light" ? image.dataset.lightSrc : image.dataset.darkSrc;
-    if (source && image.getAttribute("src") !== source) image.src = source;
-  });
 }
 
 function initializeMobileMenu(
