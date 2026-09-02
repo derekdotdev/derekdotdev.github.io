@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../data/projects";
+import { ICON_SIZES } from "../data/iconSizes";
 import Icon from "./Icon.astro";
 
 interface Props {
@@ -32,8 +33,19 @@ const { project, index } = Astro.props;
     </ul>
     <div class="project-card__links">
       <a href={project.github} target="_blank" rel="noreferrer">
-        <Icon name="github" size={18} /> Source <Icon name="arrow" size={16} />
+        <Icon name="github" size={ICON_SIZES.md} /> Source <Icon
+          name="arrow"
+          size={ICON_SIZES.sm}
+        />
       </a>
+      {
+        project.caseStudy && (
+          <a class="case-study-link" href={project.caseStudy}>
+            <Icon name="article" size={ICON_SIZES.md} /> Case study
+            <Icon name="arrow" size={ICON_SIZES.sm} />
+          </a>
+        )
+      }
       {
         project.preview && (
           <a
@@ -42,7 +54,7 @@ const { project, index } = Astro.props;
             target="_blank"
             rel="noreferrer"
           >
-            <Icon name="play" size={18} /> Preview
+            <Icon name="play" size={ICON_SIZES.md} /> Preview
           </a>
         )
       }
@@ -177,7 +189,12 @@ const { project, index } = Astro.props;
     transform: translateX(3px);
   }
   .project-card__links .secondary-link {
-    color: var(--color-text-secondary);
+    color: var(--color-text);
+    font-weight: 650;
+  }
+  .project-card__links .case-study-link {
+    color: var(--color-text);
+    font-weight: 650;
   }
 
   @media (max-width: 800px) {

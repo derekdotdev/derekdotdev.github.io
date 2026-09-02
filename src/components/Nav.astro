@@ -1,18 +1,25 @@
 ---
 import Icon from "./Icon.astro";
+import { ICON_SIZES } from "../data/iconSizes";
+
+const isHomePage = Astro.url.pathname === "/";
+const sectionHref = (section: string) =>
+  isHomePage ? `#${section}` : `/#${section}`;
 ---
 
 <header class="nav-shell">
   <nav class="nav container" aria-label="Main navigation">
-    <a class="brand" href="#top">
+    <a class="brand" href={isHomePage ? "#top" : "/"}>
       <span class="brand__mark" aria-hidden="true">DD</span>
       <span>Derek DiLeo</span>
     </a>
     <div id="mobile-navigation" class="nav__links">
-      <a href="#about" data-section-link="about">About</a>
-      <a href="#work" data-section-link="work">Work</a>
-      <a href="#approach" data-section-link="approach">Approach</a>
-      <a href="#contact" data-section-link="contact">Contact</a>
+      <a href={sectionHref("about")} data-section-link="about">About</a>
+      <a href={sectionHref("work")} data-section-link="work">Work</a>
+      <a href={sectionHref("approach")} data-section-link="approach">
+        Approach
+      </a>
+      <a href={sectionHref("contact")} data-section-link="contact">Contact</a>
     </div>
     <div class="nav__actions">
       <button
@@ -22,10 +29,10 @@ import Icon from "./Icon.astro";
         title="Switch to light theme"
       >
         <span class="nav__theme-icon nav__theme-icon--sun"
-          ><Icon name="sun" size={18} /></span
+          ><Icon name="sun" size={ICON_SIZES.md} /></span
         >
         <span class="nav__theme-icon nav__theme-icon--moon"
-          ><Icon name="moon" size={18} /></span
+          ><Icon name="moon" size={ICON_SIZES.md} /></span
         >
       </button>
       <a
@@ -35,7 +42,7 @@ import Icon from "./Icon.astro";
         rel="noreferrer"
         aria-label="GitHub profile"
       >
-        <Icon name="github" size={18} />
+        <Icon name="github" size={ICON_SIZES.md} />
         <span>GitHub</span>
       </a>
       <button
