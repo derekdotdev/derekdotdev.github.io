@@ -67,10 +67,14 @@
   }
 
   @keyframes drift {
-    to { transform: translate3d(4rem, 3rem, 0) scale(1.08); }
+    to {
+      transform: translate3d(4rem, 3rem, 0) scale(1.08);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .ambient__orb { animation: none; }
+    .ambient__orb {
+      animation: none;
+    }
   }
 </style>

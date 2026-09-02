@@ -11,23 +11,30 @@ import { principles } from "../../data/profile";
   <div class="about-grid">
     <div class="about-copy" data-reveal>
       <p class="about-copy__lead">
-        I build Android systems that remain understandable, testable, and adaptable as products grow.
+        I build Android systems that remain understandable, testable, and
+        adaptable as products grow.
       </p>
       <p>
-        As an L3 Software Engineer and UI architecture owner, I establish scalable patterns with Jetpack Compose, MVI, ViewModels, and Clean Architecture. I maintain clear, dependency-inverted boundaries from the UI and domain layers through Room persistence and JNI-backed C++ integration in the data layer.
+        As an L3 Software Engineer and UI architecture owner, I establish
+        scalable patterns with Jetpack Compose, MVI, ViewModels, and Clean
+        Architecture. I maintain clear, dependency-inverted boundaries from the
+        UI and domain layers through Room persistence and JNI-backed C++
+        integration in the data layer.
       </p>
     </div>
 
     <div class="principles" data-reveal>
-      {principles.map((principle) => (
-        <article>
-          <span>{principle.number}</span>
-          <div>
-            <h3>{principle.title}</h3>
-            <p>{principle.description}</p>
-          </div>
-        </article>
-      ))}
+      {
+        principles.map((principle) => (
+          <article>
+            <span>{principle.number}</span>
+            <div>
+              <h3>{principle.title}</h3>
+              <p>{principle.description}</p>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>

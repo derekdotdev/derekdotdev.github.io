@@ -11,17 +11,22 @@ const { resumeUrl } = Astro.props;
 
 <section class="hero container">
   <div class="hero__content">
-    <p class="availability"><span></span> Android engineer · Clean architecture, polished experiences</p>
+    <p class="availability">
+      <span></span> Android engineer · Clean architecture, polished experiences
+    </p>
     <h1>
       <span>I build software</span>
       <span>that feels</span>
       <span><em>considered.</em></span>
     </h1>
     <p class="hero__lede">
-      I’m Derek, an Android engineer who defines scalable UI patterns and builds maintainable applications from Compose through the data layer.
+      I’m Derek, an Android engineer who defines scalable UI patterns and builds
+      maintainable applications from Compose through the data layer.
     </p>
     <div class="hero__actions">
-      <a class="button button--primary" href="#projects">Explore my work <Icon name="arrow" /></a>
+      <a class="button button--primary" href="#projects"
+        >Explore my work <Icon name="arrow" /></a
+      >
       <ResumeLink href={resumeUrl} />
     </div>
   </div>
@@ -35,12 +40,20 @@ const { resumeUrl } = Astro.props;
         <p class="code-value">UI Architecture</p>
         <div class="code-rule"></div>
         <p class="code-label">BUILDING_WITH</p>
-        <div class="code-pills"><span>Kotlin</span><span>Compose</span><span>C++ / JNI</span></div>
-        <div class="signal" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="code-pills">
+          <span>Kotlin</span><span>Compose</span><span>C++ / JNI</span>
+        </div>
+        <div class="signal" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
       </div>
     </div>
-    <p class="hero__aside-note"><span>01</span> Engineering with product instinct</p>
+    <p class="hero__aside-note">
+      <span>01</span> Engineering with product instinct
+    </p>
   </div>
 
-  <a class="scroll-cue" href="#about" aria-label="Scroll to about section"><span></span> Scroll to explore</a>
+  <a class="scroll-cue" href="#about" aria-label="Scroll to about section"
+    ><span></span> Scroll to explore</a
+  >
 </section>

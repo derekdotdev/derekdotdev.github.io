@@ -8,24 +8,34 @@ import { capabilities } from "../../data/profile";
       <p class="eyebrow">Engineering approach</p>
       <h2>Built for change.</h2>
     </div>
-    <p>Architecture should make product development safer and more predictable while increasing developer velocity—not add ceremony for its own sake.</p>
+    <p>
+      Architecture should make product development safer and more predictable
+      while increasing developer velocity—not add ceremony for its own sake.
+    </p>
   </div>
 
   <div class="capabilities" data-reveal>
     <div class="capabilities__intro">
       <h2>Mobile first.<br />Systems fluent.</h2>
-      <p>I work across the Android application stack, creating clear boundaries and reusable patterns that help engineers ship confidently and move faster.</p>
+      <p>
+        I work across the Android application stack, creating clear boundaries
+        and reusable patterns that help engineers ship confidently and move
+        faster.
+      </p>
     </div>
     <div class="capability-grid">
-      {capabilities.map((capability) => (
-        <article>
-          <span>{capability.number}</span>
-          <h3>{capability.title}</h3>
-          <p>{capability.description}</p>
-        </article>
-      ))}
+      {
+        capabilities.map((capability) => (
+          <article>
+            <span>{capability.number}</span>
+            <h3>{capability.title}</h3>
+            <p>{capability.description}</p>
+          </article>
+        ))
+      }
       <p class="capability-grid__additional">
-        <span>Additional experience</span> Working knowledge of Kotlin Multiplatform and shared cross-platform architecture.
+        <span>Additional experience</span> Working knowledge of Kotlin Multiplatform
+        and shared cross-platform architecture.
       </p>
     </div>
   </div>

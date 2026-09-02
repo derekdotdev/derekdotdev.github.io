@@ -7,11 +7,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "format": "prettier --write src .github README.md package.json astro.config.mjs tsconfig.json",
+    "format:check": "prettier --check src .github README.md package.json astro.config.mjs tsconfig.json"
   },
   "dependencies": {
     "@astrojs/check": "latest",
     "astro": "latest",
     "typescript": "latest"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

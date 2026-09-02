@@ -4,7 +4,9 @@ export function initializeNavigation(): void {
   const navigation = document.querySelector<HTMLElement>(".nav-shell");
   if (!navigation) return;
 
-  const sectionLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"));
+  const sectionLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"),
+  );
 
   initializeThemeToggle();
   initializeMobileMenu(navigation, sectionLinks);
@@ -12,7 +14,8 @@ export function initializeNavigation(): void {
 }
 
 function initializeThemeToggle(): void {
-  const toggle = document.querySelector<HTMLButtonElement>(".nav__theme-toggle");
+  const toggle =
+    document.querySelector<HTMLButtonElement>(".nav__theme-toggle");
   const themeColor = document.querySelector<HTMLMetaElement>("#theme-color");
   if (!toggle) return;
 
@@ -50,37 +53,66 @@ function updateThemeControls(
   themeColor?.setAttribute("content", theme === "dark" ? "#080a0d" : "#f4f7f5");
 }
 
-function initializeMobileMenu(navigation: HTMLElement, sectionLinks: HTMLAnchorElement[]): void {
+function initializeMobileMenu(
+  navigation: HTMLElement,
+  sectionLinks: HTMLAnchorElement[],
+): void {
   const menu = navigation.querySelector<HTMLElement>(".nav__links");
-  const toggle = navigation.querySelector<HTMLButtonElement>(".nav__menu-toggle");
+  const toggle =
+    navigation.querySelector<HTMLButtonElement>(".nav__menu-toggle");
   if (!menu || !toggle) return;
 
   const closeMenu = () => setMenuOpen(menu, toggle, false);
 
-  toggle.addEventListener("click", () => setMenuOpen(menu, toggle, !menu.classList.contains("is-open")));
+  toggle.addEventListener("click", () =>
+    setMenuOpen(menu, toggle, !menu.classList.contains("is-open")),
+  );
   sectionLinks.forEach((link) => link.addEventListener("click", closeMenu));
-  document.addEventListener("click", (event) => closeMenuOnOutsideClick(event, navigation, closeMenu));
-  document.addEventListener("keydown", (event) => closeMenuOnEscape(event, toggle, closeMenu));
+  document.addEventListener("click", (event) =>
+    closeMenuOnOutsideClick(event, navigation, closeMenu),
+  );
+  document.addEventListener("keydown", (event) =>
+    closeMenuOnEscape(event, toggle, closeMenu),
+  );
 }
 
-function setMenuOpen(menu: HTMLElement, toggle: HTMLButtonElement, isOpen: boolean): void {
+function setMenuOpen(
+  menu: HTMLElement,
+  toggle: HTMLButtonElement,
+  isOpen: boolean,
+): void {
   menu.classList.toggle("is-open", isOpen);
   toggle.setAttribute("aria-expanded", String(isOpen));
-  toggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+  toggle.setAttribute(
+    "aria-label",
+    isOpen ? "Close navigation menu" : "Open navigation menu",
+  );
 }
 
-function closeMenuOnOutsideClick(event: MouseEvent, navigation: HTMLElement, closeMenu: () => void): void {
+function closeMenuOnOutsideClick(
+  event: MouseEvent,
+  navigation: HTMLElement,
+  closeMenu: () => void,
+): void {
   if (!navigation.contains(event.target as Node)) closeMenu();
 }
 
-function closeMenuOnEscape(event: KeyboardEvent, toggle: HTMLButtonElement, closeMenu: () => void): void {
-  if (event.key !== "Escape" || toggle.getAttribute("aria-expanded") !== "true") return;
+function closeMenuOnEscape(
+  event: KeyboardEvent,
+  toggle: HTMLButtonElement,
+  closeMenu: () => void,
+): void {
+  if (event.key !== "Escape" || toggle.getAttribute("aria-expanded") !== "true")
+    return;
 
   closeMenu();
   toggle.focus();
 }
 
-function initializeSectionTracking(navigation: HTMLElement, sectionLinks: HTMLAnchorElement[]): void {
+function initializeSectionTracking(
+  navigation: HTMLElement,
+  sectionLinks: HTMLAnchorElement[],
+): void {
   const sections = getLinkedSections(sectionLinks);
   let updatePending = false;
 
@@ -102,7 +134,9 @@ function initializeSectionTracking(navigation: HTMLElement, sectionLinks: HTMLAn
 
 function getLinkedSections(sectionLinks: HTMLAnchorElement[]): HTMLElement[] {
   return sectionLinks
-    .map((link) => document.querySelector<HTMLElement>(`#${link.dataset.sectionLink}`))
+    .map((link) =>
+      document.querySelector<HTMLElement>(`#${link.dataset.sectionLink}`),
+    )
     .filter((section): section is HTMLElement => section !== null);
 }
 
@@ -117,14 +151,21 @@ function updateNavigationState(
 
 function findActiveSection(sections: HTMLElement[]): string | undefined {
   const readingPosition = window.scrollY + window.innerHeight * 0.38;
-  const currentSection = sections.findLast((section) => section.offsetTop <= readingPosition);
-  const isAtPageEnd = window.scrollY > 0
-    && window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
+  const currentSection = sections.findLast(
+    (section) => section.offsetTop <= readingPosition,
+  );
+  const isAtPageEnd =
+    window.scrollY > 0 &&
+    window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 8;
 
   return isAtPageEnd ? sections.at(-1)?.id : currentSection?.id;
 }
 
-function setActiveSection(sectionLinks: HTMLAnchorElement[], activeSectionId?: string): void {
+function setActiveSection(
+  sectionLinks: HTMLAnchorElement[],
+  activeSectionId?: string,
+): void {
   sectionLinks.forEach((link) => {
     const isActive = link.dataset.sectionLink === activeSectionId;
     link.classList.toggle("is-active", isActive);
