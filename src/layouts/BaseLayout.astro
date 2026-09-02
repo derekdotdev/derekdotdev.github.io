@@ -15,7 +15,18 @@ const socialImage = new URL("/social-preview.png", Astro.site);
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#080a0d" />
+    <meta name="color-scheme" content="dark light" />
+    <meta id="theme-color" name="theme-color" content="#080a0d" />
+    <script is:inline>
+      (() => {
+        let savedTheme;
+        try { savedTheme = localStorage.getItem("theme"); } catch {}
+        const theme = savedTheme === "light" || savedTheme === "dark"
+          ? savedTheme
+          : window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
