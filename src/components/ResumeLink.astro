@@ -1,0 +1,13 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<a class="button button--ghost" href={href} download="derek-dileo-resume.pdf">
+  <Icon name="download" /> Download Resume
+</a>

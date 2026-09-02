@@ -1,0 +1,16 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<footer class="footer container">
+  <p>Designed and built by Derek DiLeo <span>·</span> <span id="year"></span></p>
+  <div>
+    <a href="https://github.com/derekdotdev" target="_blank" rel="noreferrer"><Icon name="github" /> GitHub</a>
+    <a href="https://www.linkedin.com/in/derek-dileo" target="_blank" rel="noreferrer"><Icon name="linkedin" /> LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  const year = document.querySelector("#year");
+  if (year) year.textContent = String(new Date().getFullYear());
+</script>

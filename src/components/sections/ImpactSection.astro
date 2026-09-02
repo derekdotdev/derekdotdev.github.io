@@ -1,0 +1,24 @@
+---
+import { impacts } from "../../data/profile";
+---
+
+<section class="section container">
+  <div id="work" class="section-heading section-heading--split" data-reveal>
+    <div>
+      <p class="eyebrow">Professional impact</p>
+      <h2>Architecture in motion.</h2>
+    </div>
+    <p>Production work where better structure translated into simpler workflows, safer changes, and more capable Android systems.</p>
+  </div>
+
+  <div class="impact-grid">
+    {impacts.map((impact) => (
+      <article data-reveal>
+        <div class="impact-card__meta"><span>{impact.number}</span><span>{impact.category}</span></div>
+        <h3>{impact.title}</h3>
+        <p>{impact.description}</p>
+        <ul>{impact.outcomes.map((outcome) => <li>{outcome}</li>)}</ul>
+      </article>
+    ))}
+  </div>
+</section>
