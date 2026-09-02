@@ -16,7 +16,7 @@ export const projects: Project[] = [
     eyebrow: "Mobile product",
     description:
       "A cross-platform app that connects audiences with nearby live entertainers for real-time song requests. Built around location-aware discovery, role-based experiences, and live request management.",
-    image: "/img/portfolio/request-live-main.png",
+    image: "/img/portfolio/request-live-main.webp",
     imageAlt: "Request Live Music mobile application screens",
     stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     github: "https://github.com/derekdotdev/request-live-mobile",
