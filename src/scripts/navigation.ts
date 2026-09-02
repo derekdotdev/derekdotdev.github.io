@@ -1,5 +1,7 @@
 type Theme = "dark" | "light";
 
+const TOP_OF_PAGE_THRESHOLD = 16;
+
 export function initializeNavigation(): void {
   const navigation = document.querySelector<HTMLElement>(".nav-shell");
   if (!navigation) return;
@@ -130,6 +132,7 @@ function initializeSectionTracking(
 
   window.addEventListener("scroll", requestUpdate, { passive: true });
   window.addEventListener("resize", requestUpdate, { passive: true });
+  window.addEventListener("pageshow", requestUpdate);
 }
 
 function getLinkedSections(sectionLinks: HTMLAnchorElement[]): HTMLElement[] {
@@ -150,14 +153,15 @@ function updateNavigationState(
 }
 
 function findActiveSection(sections: HTMLElement[]): string | undefined {
+  if (window.scrollY <= TOP_OF_PAGE_THRESHOLD) return undefined;
+
   const readingPosition = window.scrollY + window.innerHeight * 0.38;
   const currentSection = sections.findLast(
     (section) => section.offsetTop <= readingPosition,
   );
   const isAtPageEnd =
-    window.scrollY > 0 &&
     window.innerHeight + window.scrollY >=
-      document.documentElement.scrollHeight - 8;
+    document.documentElement.scrollHeight - 8;
 
   return isAtPageEnd ? sections.at(-1)?.id : currentSection?.id;
 }
