@@ -1,3 +1,4 @@
+/* Typography and theme tokens */
 @font-face {
   font-family: "Manrope";
   font-style: normal;
@@ -100,6 +101,7 @@
   --color-scroll-cue: #68736f;
 }
 
+/* Document foundation and shared primitives */
 * {
   box-sizing: border-box;
 }
@@ -153,6 +155,7 @@ a {
   text-transform: uppercase;
 }
 
+/* Progressive reveal behavior */
 [data-reveal] {
   opacity: 0;
   transform: translateY(20px);
@@ -165,6 +168,7 @@ a {
   transform: none;
 }
 
+/* Hero */
 .hero {
   position: relative;
   display: grid;
@@ -417,6 +421,7 @@ a {
   background: currentColor;
 }
 
+/* Shared section headings */
 .section-heading {
   margin-bottom: clamp(3rem, 7vw, 5rem);
 }
@@ -441,6 +446,7 @@ a {
   color: var(--muted);
   line-height: 1.7;
 }
+/* About */
 .about-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -482,6 +488,7 @@ a {
   font-size: 0.88rem;
   line-height: 1.65;
 }
+/* Professional impact */
 .impact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -563,6 +570,7 @@ a {
   color: var(--color-text-secondary);
   font: 500 0.62rem/1 var(--font-mono);
 }
+/* Selected work */
 .section--work {
   width: min(1320px, calc(100% - 3rem));
 }
@@ -570,6 +578,7 @@ a {
   display: grid;
   gap: 2rem;
 }
+/* Engineering approach */
 .capabilities {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -619,6 +628,7 @@ a {
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+/* Contact and footer */
 .contact {
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -688,6 +698,7 @@ a {
   height: 1rem;
 }
 
+/* Responsive behavior */
 @media (max-width: 900px) {
   .hero {
     grid-template-columns: 1fr;
