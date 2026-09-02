@@ -27,7 +27,7 @@ export const projects: Project[] = [
     eyebrow: "Civic technology",
     description:
       "A privacy-conscious platform that helps students find relevant local resources while giving authorized city staff tools to understand needs and maintain assistance programs.",
-    image: "/img/portfolio/youth-homelessness.png",
+    image: "/img/portfolio/youth-homelessness.webp",
     imageAlt: "Youth Homelessness Project resource interface",
     stack: ["Java", "Spring Boot", "Spring Security", "SQL"],
     github: "https://github.com/derekdotdev/YouthHomelessnessProject",
