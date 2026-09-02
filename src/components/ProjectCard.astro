@@ -16,6 +16,8 @@ const { project, index } = Astro.props;
   <div class="project-card__media">
     <img
       src={project.image}
+      data-dark-src={project.image}
+      data-light-src={project.lightImage}
       alt={project.imageAlt}
       loading={index > 1 ? "lazy" : "eager"}
     />

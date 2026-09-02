@@ -3,6 +3,7 @@ export type Project = {
   eyebrow: string;
   description: string;
   image: string;
+  lightImage: string;
   imageAlt: string;
   stack: string[];
   github: string;
@@ -17,6 +18,7 @@ export const projects: Project[] = [
     description:
       "A cross-platform app that connects audiences with nearby live entertainers for real-time song requests. Built around location-aware discovery, role-based experiences, and live request management.",
     image: "/img/portfolio/request-live-main.webp",
+    lightImage: "/img/portfolio/request-live-main-light.webp",
     imageAlt: "Request Live Music mobile application screens",
     stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     github: "https://github.com/derekdotdev/request-live-mobile",
@@ -28,6 +30,7 @@ export const projects: Project[] = [
     description:
       "A privacy-conscious platform that helps students find relevant local resources while giving authorized city staff tools to understand needs and maintain assistance programs.",
     image: "/img/portfolio/youth-homelessness.webp",
+    lightImage: "/img/portfolio/youth-homelessness-light.webp",
     imageAlt: "Youth Homelessness Project resource interface",
     stack: ["Java", "Spring Boot", "Spring Security", "SQL"],
     github: "https://github.com/derekdotdev/YouthHomelessnessProject",
@@ -40,6 +43,7 @@ export const projects: Project[] = [
     description:
       "An Arduino data-collection system that measures a pet’s response time at mealtime using sound and motion sensors, timestamps each event, and exports the results for analysis.",
     image: "/img/portfolio/cat-tracker.webp",
+    lightImage: "/img/portfolio/cat-tracker-light.webp",
     imageAlt: "Cat Tracker hardware and data visualization",
     stack: ["Arduino", "C++", "Sensors", "Data logging"],
     github: "https://github.com/derekdotdev/cat-tracker",

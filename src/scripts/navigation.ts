@@ -30,13 +30,22 @@ function initializeThemeToggle(): void {
   const themeColor = document.querySelector<HTMLMetaElement>("#theme-color");
   if (!toggle) return;
 
-  updateThemeControls(toggle, themeColor, getCurrentTheme());
+  applyTheme(toggle, themeColor, getCurrentTheme());
   toggle.addEventListener("click", () => {
     const theme = getCurrentTheme() === "dark" ? "light" : "dark";
     document.documentElement.dataset.theme = theme;
     saveTheme(theme);
-    updateThemeControls(toggle, themeColor, theme);
+    applyTheme(toggle, themeColor, theme);
   });
+}
+
+function applyTheme(
+  toggle: HTMLButtonElement,
+  themeColor: HTMLMetaElement | null,
+  theme: Theme,
+): void {
+  updateThemeControls(toggle, themeColor, theme);
+  updateProjectImages(theme);
 }
 
 function getCurrentTheme(): Theme {
@@ -62,6 +71,18 @@ function updateThemeControls(
   toggle.setAttribute("aria-label", label);
   toggle.setAttribute("title", label);
   themeColor?.setAttribute("content", theme === "dark" ? "#080a0d" : "#f4f7f5");
+}
+
+function updateProjectImages(theme: Theme): void {
+  const images = document.querySelectorAll<HTMLImageElement>(
+    "[data-dark-src][data-light-src]",
+  );
+
+  images.forEach((image) => {
+    const source =
+      theme === "light" ? image.dataset.lightSrc : image.dataset.darkSrc;
+    if (source && image.getAttribute("src") !== source) image.src = source;
+  });
 }
 
 function initializeMobileMenu(
