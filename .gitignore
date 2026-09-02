@@ -2,6 +2,8 @@ _site
 node_modules
 dist
 .astro
+playwright-report
+test-results
 
 # Windows image file caches
 Thumbs.db

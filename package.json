@@ -8,10 +8,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "vitest run",
+    "test": "vitest run src",
     "test:watch": "vitest",
-    "format": "prettier --write src .github README.md package.json astro.config.mjs tsconfig.json",
-    "format:check": "prettier --check src .github README.md package.json astro.config.mjs tsconfig.json"
+    "format": "prettier --write src e2e .github README.md package.json astro.config.mjs playwright.config.ts tsconfig.json",
+    "format:check": "prettier --check src e2e .github README.md package.json astro.config.mjs playwright.config.ts tsconfig.json",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@astrojs/check": "latest",
@@ -20,6 +21,8 @@
     "typescript": "latest"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.4.1",
     "jsdom": "^30.0.1",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
