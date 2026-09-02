@@ -7,6 +7,7 @@ export type Project = {
   imageAlt: string;
   stack: string[];
   github: string;
+  caseStudy?: string;
   preview?: string;
   featured?: boolean;
 };
@@ -22,6 +23,7 @@ export const projects: Project[] = [
     imageAlt: "Request Live Music mobile application screens",
     stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     github: "https://github.com/derekdotdev/request-live-mobile",
+    caseStudy: "/case-studies/request-live-music/",
     featured: true,
   },
   {
