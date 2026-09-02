@@ -8,16 +8,21 @@ import Icon from "./Icon.astro";
       <span class="brand__mark" aria-hidden="true">DD</span>
       <span>Derek DiLeo</span>
     </a>
-    <div class="nav__links">
+    <div id="mobile-navigation" class="nav__links">
       <a href="#about" data-section-link="about">About</a>
       <a href="#work" data-section-link="work">Work</a>
       <a href="#approach" data-section-link="approach">Approach</a>
       <a href="#contact" data-section-link="contact">Contact</a>
     </div>
-    <a class="nav__github" href="https://github.com/derekdotdev" target="_blank" rel="noreferrer" aria-label="GitHub profile">
-      <Icon name="github" size={18} />
-      <span>GitHub</span>
-    </a>
+    <div class="nav__actions">
+      <a class="nav__github" href="https://github.com/derekdotdev" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+        <Icon name="github" size={18} />
+        <span>GitHub</span>
+      </a>
+      <button class="nav__menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-navigation" aria-label="Open navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 </header>
 
@@ -37,6 +42,7 @@ import Icon from "./Icon.astro";
   }
 
   .nav {
+    position: relative;
     height: 76px;
     display: flex;
     align-items: center;
@@ -101,16 +107,64 @@ import Icon from "./Icon.astro";
   }
   .nav__github:hover { border-color: var(--color-action-border); background: var(--color-action-muted); }
 
+  .nav__actions { display: flex; align-items: center; gap: .65rem; }
+  .nav__menu-toggle {
+    display: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: .68rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: .75rem;
+    color: var(--color-text);
+    background: transparent;
+    cursor: pointer;
+  }
+  .nav__menu-toggle span {
+    display: block;
+    height: 1.5px;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+  .nav__menu-toggle span + span { margin-top: 4px; }
+  .nav__menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(5.5px) rotate(45deg); }
+  .nav__menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav__menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-5.5px) rotate(-45deg); }
+
   @media (max-width: 640px) {
     .nav { height: 66px; }
-    .nav__links { display: none; }
+    .nav__links {
+      position: absolute;
+      top: calc(100% + .5rem);
+      right: 0;
+      left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: .25rem;
+      padding: .65rem;
+      border: 1px solid var(--color-line-strong);
+      border-radius: 1rem;
+      background: var(--color-surface-raised);
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, .35);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-.5rem);
+      transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+    }
+    .nav__links.is-open { opacity: 1; visibility: visible; transform: none; }
+    .nav__links a { padding: .85rem 1rem; border-radius: .65rem; }
+    .nav__links a:hover, .nav__links a.is-active { background: var(--color-action-muted); }
+    .nav__links a::after { display: none; }
     .nav__github span { display: none; }
     .nav__github { padding: .62rem; }
+    .nav__menu-toggle { display: block; }
   }
 </style>
 
 <script>
   const nav = document.querySelector(".nav-shell");
+  const menu = document.querySelector<HTMLElement>(".nav__links");
+  const menuToggle = document.querySelector<HTMLButtonElement>(".nav__menu-toggle");
   const links = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"));
   const sections = links
     .map((link) => document.querySelector<HTMLElement>(`#${link.dataset.sectionLink}`))
@@ -124,6 +178,29 @@ import Icon from "./Icon.astro";
       else link.removeAttribute("aria-current");
     });
   };
+
+  const closeMenu = () => {
+    menu?.classList.remove("is-open");
+    menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle?.setAttribute("aria-label", "Open navigation menu");
+  };
+
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = menu?.classList.toggle("is-open") ?? false;
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+  });
+  links.forEach((link) => link.addEventListener("click", closeMenu));
+  document.addEventListener("click", (event) => {
+    if (nav?.contains(event.target as Node)) return;
+    closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menuToggle?.getAttribute("aria-expanded") === "true") {
+      closeMenu();
+      menuToggle?.focus();
+    }
+  });
 
   let framePending = false;
   const updateNav = () => {
