@@ -1,0 +1,163 @@
+---
+import CaseStudyLayout from "../../components/CaseStudyLayout.astro";
+
+const title = "Vehicle Pairing Wizards — Derek DiLeo";
+const description =
+  "How I helped turn a technical vehicle-connection workflow into a repeatable, operator-friendly Android experience.";
+---
+
+<CaseStudyLayout
+  title={title}
+  description={description}
+  eyebrow="Android · Vehicle integration · UX"
+  heading="From CLI commands to pairing wizards"
+  intro="Turning vehicle pairing into a workflow anyone could use."
+>
+  <div slot="meta" class="case-study__meta">
+    <span>Role</span>
+    <strong>Android engineer</strong>
+    <span>Scope</span>
+    <strong>Pairing workflow</strong>
+  </div>
+
+  <div slot="aside">
+    <p class="eyebrow">At a glance</p>
+    <dl>
+      <div><dt>Starting point</dt><dd>CLI + web API</dd></div>
+      <div><dt>Primary users</dt><dd>Vehicle operators</dd></div>
+      <div><dt>Workflow</dt><dd>Configure → discover → connect</dd></div>
+      <div><dt>Outcome</dt><dd>Repeatable pairing</dd></div>
+    </dl>
+  </div>
+
+  <p class="eyebrow">The problem</p>
+  <h2>Discovery worked. The workflow didn’t.</h2>
+  <p>
+    Implementers developed against our SDK and, when a vehicle was discovered,
+    the system automatically created a node that became visible and
+    controllable in Kinesis. That was a good integration experience for the
+    people building plugins, but it left too much work to the operator.
+  </p>
+  <p>
+    Configuring a ground radio through a web API, or worse, a command line, was
+    impractical for an everyday user and even less suitable for a soldier
+    downrange. We needed a guided way to configure the radio associated with a
+    given vehicle platform, discover that vehicle, connect to it, and persist
+    the settings for future use.
+  </p>
+
+  <p class="eyebrow">The workflow</p>
+  <h2>Make the technical path repeatable.</h2>
+  <p>
+    Shortly after being promoted from junior engineer to L1, I was entrusted
+    with substantial autonomy to shape this solution. I recommended Jetpack
+    Compose, layered architecture, and explicit use-case boundaries for the
+    pairing wizards. We started with one vehicle, where I owned the Android UI
+    and architecture while partnering with an integrator responsible for much
+    of the C++ implementation. I also worked across the JNI boundary when the
+    feature required it.
+  </p>
+  <p>
+    The first pairing wizard turned those disconnected steps into one guided
+    flow. A user could select the vehicle type, configure the radio, start
+    discovery, review the vehicle that appeared, and complete the connection
+    without leaving Kinesis or learning an implementation-specific command.
+  </p>
+  <p>
+    Radios were identified by IP address, which let Kinesis reuse the same
+    physical radio across different vehicles. Each vehicle could have its own
+    saved configuration—often a different channel. Enabling one of those saved
+    configurations kicked off discovery: Kinesis located the radio, applied
+    its settings, and attempted to discover the vehicle. Once the vehicle was
+    found, the plugin created a node that Kinesis could display and control.
+    When a connection needed to be retried, the operator could start the
+    process on demand instead of reconstructing the setup from memory or
+    repeating manual commands.
+  </p>
+  <p>
+    The process is repeatable by design. We can pair with a vehicle in a safe
+    setting, verify the configuration, and save it before the equipment is
+    needed. The first pairing may take time depending on the platform, but a
+    saved configuration can be recalled in moments so the vehicle can be
+    connected and launched when timing matters.
+    In practice, that means setting up the kit ahead of time, then connecting
+    to it quickly when it is needed.
+  </p>
+
+  <p class="eyebrow">The platform model</p>
+  <h2>Let plugins describe what they support.</h2>
+  <p>
+    Kinesis launched vendor plugins at startup, where each plugin began its
+    discovery loop and advertised the pairing Activities it supported. Some
+    plugins exposed more than one vehicle, each with its own pairing procedure.
+    Kinesis compiled those advertisements into a list of available wizards,
+    which users could launch when needed.
+  </p>
+  <p>
+    That model kept vendor-specific pairing logic with the plugin while giving
+    the main application a consistent way to discover and present it. The
+    result was an extensible integration point without forcing operators to
+    understand how each vehicle worked internally.
+  </p>
+
+  <p class="eyebrow">What it taught me</p>
+  <h2>Good abstractions remove operational friction.</h2>
+  <p>
+    The SDK solved the technical problem of discovering a vehicle. The wizard
+    solved the product problem of helping a person complete the job. That
+    distinction has stayed with me: an API can be correct and still leave the
+    most important work to the user.
+  </p>
+  <p>
+    I was also fortunate to have senior engineers I could lean on when I got
+    stuck. They reinforced that the only silly question is the one you do not
+    ask, and taught me that every engineer is still learning—regardless of
+    title or years of experience. I carry that lesson forward whenever a junior
+    engineer comes to me for help: make the question welcome, work through the
+    problem together, and leave them more confident than when they arrived.
+  </p>
+  <p>
+    The pairing wizards also became my first production opportunity to establish
+    Jetpack Compose and ViewModel patterns. They gave me a focused workflow in
+    which to prove a more modern UI architecture before helping move the wider
+    Kinesis application forward.
+  </p>
+</CaseStudyLayout>
+
+<style>
+  .case-study__meta {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    gap: 0.5rem 1.2rem;
+    margin-top: 3rem;
+    color: var(--color-text-muted);
+    font: 0.68rem/1.3 var(--font-mono);
+    text-transform: uppercase;
+  }
+  .case-study__meta strong {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  dl {
+    margin: 1.5rem 0 0;
+  }
+  dl div {
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+  dt {
+    color: var(--color-text-muted);
+    font: 0.62rem/1.3 var(--font-mono);
+    text-transform: uppercase;
+  }
+  dd {
+    margin: 0.35rem 0 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+  }
+  @media (max-width: 700px) {
+    .case-study__meta {
+      grid-template-columns: max-content 1fr;
+    }
+  }
+</style>
