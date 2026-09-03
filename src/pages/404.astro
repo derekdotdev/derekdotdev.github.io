@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
+import { ICON_SIZES } from "../data/iconSizes";
 
 const title = "Page not found — Derek DiLeo";
 const description =
@@ -15,8 +17,8 @@ const description =
       still right where it belongs.
     </p>
     <a class="button button--primary" href="/">
+      <Icon class="not-found__back-icon" name="arrow" size={ICON_SIZES.lg} />
       Back to the portfolio
-      <span aria-hidden="true">→</span>
     </a>
   </main>
 </BaseLayout>
@@ -47,8 +49,7 @@ const description =
     line-height: 1.75;
   }
 
-  .button span {
-    font-size: 1.25em;
-    line-height: 0;
+  :global(.not-found__back-icon) {
+    transform: rotate(180deg);
   }
 </style>
