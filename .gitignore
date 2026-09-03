@@ -4,6 +4,7 @@ dist
 .astro
 playwright-report
 test-results
+.private/
 
 # Windows image file caches
 Thumbs.db
