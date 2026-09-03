@@ -3,6 +3,7 @@ import Icon from "./Icon.astro";
 import { ICON_SIZES } from "../data/iconSizes";
 
 const isHomePage = Astro.url.pathname === "/";
+const isBlogPage = Astro.url.pathname.startsWith("/blog");
 const sectionHref = (section: string) =>
   isHomePage ? `#${section}` : `/#${section}`;
 ---
@@ -20,6 +21,7 @@ const sectionHref = (section: string) =>
         Approach
       </a>
       <a href={sectionHref("contact")} data-section-link="contact">Contact</a>
+      <a href="/blog/" class:list={{ "is-active": isBlogPage }}>Blog</a>
     </div>
     <div class="nav__actions">
       <button

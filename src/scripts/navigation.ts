@@ -18,14 +18,13 @@ export function initializeNavigation(): void {
   );
 
   initializeThemeToggle();
-  initializeMobileMenu(navigation, sectionLinks);
+  initializeMobileMenu(navigation);
   initializeAnchorScrolling();
   initializeSectionTracking(navigation, sectionLinks);
 }
 
 function initializeMobileMenu(
   navigation: HTMLElement,
-  sectionLinks: HTMLAnchorElement[],
 ): void {
   const menu = navigation.querySelector<HTMLElement>(".nav__links");
   const toggle =
@@ -37,7 +36,9 @@ function initializeMobileMenu(
   toggle.addEventListener("click", () =>
     setMenuOpen(menu, toggle, !menu.classList.contains("is-open")),
   );
-  sectionLinks.forEach((link) => link.addEventListener("click", closeMenu));
+  menu
+    .querySelectorAll<HTMLAnchorElement>("a")
+    .forEach((link) => link.addEventListener("click", closeMenu));
   document.addEventListener("click", (event) =>
     closeMenuOnOutsideClick(event, navigation, closeMenu),
   );

@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { ICON_SIZES } from "../../data/iconSizes";
+import { blogPosts } from "../../data/blogPosts";
+
+const title = "Writing and case studies — Derek DiLeo";
+const description =
+  "Case studies and notes on Android architecture, product building, and software craft.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="blog-index container" id="top">
+    <header class="blog-index__hero">
+      <p class="eyebrow">Projects, patterns, and lessons learned</p>
+      <h1>What I built and what it taught me.</h1>
+      <p>
+        A closer look at the decisions, tradeoffs, and lessons behind the work.
+      </p>
+    </header>
+
+    <section class="blog-index__list" aria-label="Case studies">
+      {
+        blogPosts.map((post, index) => (
+          <a class="blog-card" href={post.href}>
+            <span class="blog-card__number">0{index + 1}</span>
+            <div>
+              <p class="eyebrow">{post.eyebrow}</p>
+              <h2>{post.title}</h2>
+              <p>{post.description}</p>
+            </div>
+            <Icon name="arrow" size={ICON_SIZES.md} />
+          </a>
+        ))
+      }
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .blog-index {
+    padding-top: 11rem;
+    padding-bottom: 8rem;
+  }
+  .blog-index__hero {
+    max-width: 46rem;
+    margin-bottom: 5rem;
+  }
+  h1 {
+    max-width: 10ch;
+    margin: 1rem 0 1.5rem;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+  .blog-index__hero > p:last-child {
+    max-width: 34rem;
+    color: var(--color-text-secondary);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.7;
+  }
+  .blog-index__list {
+    display: grid;
+    gap: 1rem;
+    max-width: 62rem;
+  }
+  .blog-card {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+      145deg,
+      var(--color-surface-raised),
+      var(--color-card-end)
+    );
+    transition:
+      transform 220ms ease,
+      border-color 220ms ease,
+      background 220ms ease;
+  }
+  .blog-card:hover {
+    border-color: var(--color-action-border);
+    background: var(--color-panel-fill);
+    transform: translateY(-3px);
+  }
+  .blog-card__number {
+    align-self: start;
+    color: var(--color-highlight-soft);
+    font: 500 0.72rem/1 var(--font-mono);
+  }
+  .blog-card h2 {
+    max-width: 20ch;
+    margin: 0.6rem 0 0.8rem;
+    font-size: clamp(1.7rem, 3vw, 2.7rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+  }
+  .blog-card p:not(.eyebrow) {
+    max-width: 38rem;
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .blog-card > svg {
+    color: var(--color-action-soft);
+    transition: transform 180ms ease;
+  }
+  .blog-card:hover > svg {
+    transform: translateX(0.25rem);
+  }
+  @media (max-width: 600px) {
+    .blog-index {
+      padding-top: 8rem;
+    }
+    .blog-card {
+      grid-template-columns: 2rem minmax(0, 1fr);
+    }
+    .blog-card > svg {
+      display: none;
+    }
+  }
+</style>
