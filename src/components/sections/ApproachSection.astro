@@ -1,5 +1,7 @@
 ---
 import { capabilities } from "../../data/profile";
+import Icon from "../Icon.astro";
+import { ICON_SIZES } from "../../data/iconSizes";
 ---
 
 <section class="section container">
@@ -22,6 +24,9 @@ import { capabilities } from "../../data/profile";
         and reusable patterns that help engineers ship confidently and move
         faster.
       </p>
+      <a class="approach-case-study" href="/blog/modernizing-android-architecture/">
+        Read the AgentStatusCard case study <Icon name="arrow" size={ICON_SIZES.sm} />
+      </a>
     </div>
     <div class="capability-grid">
       {

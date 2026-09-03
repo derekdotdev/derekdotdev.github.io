@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import CaseStudyLayout from "../../components/CaseStudyLayout.astro";
 import Icon from "../../components/Icon.astro";
 import { ICON_SIZES } from "../../data/iconSizes";
 
@@ -8,23 +8,14 @@ const description =
   "How a song-request idea became the project that started Derek DiLeo’s software career.";
 ---
 
-<BaseLayout title={title} description={description}>
-  <main class="case-study container" id="top">
-    <a class="back-link" href="/#projects">
-      <Icon name="arrow-left" size={ICON_SIZES.sm} /> Back to selected work
-    </a>
-
-    <header class="case-study__hero">
-      <p class="eyebrow">Origin story · Flutter · Dart · Firebase</p>
-      <h1>An idea that started a career.</h1>
-      <p class="case-study__intro">
-        Request Live Music began with a problem I experienced behind the booth:
-        trying to understand a song request while counting beats, reading the
-        room, and planning the next few tracks. It became my first real product,
-        my first production crash, and the project that convinced me I could
-        become a developer.
-      </p>
-      <div class="case-study__meta">
+<CaseStudyLayout
+  title={title}
+  description={description}
+  eyebrow="Origin story · Flutter · Dart · Firebase"
+  heading="An idea that started a career."
+  intro="Request Live Music began with a problem I experienced behind the booth: trying to understand a song request while counting beats, reading the room, and planning the next few tracks. It became my first real product, my first production crash, and the project that convinced me I could become a developer."
+>
+  <div slot="meta" class="case-study__meta">
         <span>Role</span>
         <strong>Product builder</strong>
         <span>Timeline</span>
@@ -37,21 +28,18 @@ const description =
         >
           GitHub <Icon name="arrow" size={ICON_SIZES.xs} />
         </a>
-      </div>
-    </header>
+  </div>
 
-    <div class="case-study__body">
-      <aside class="case-study__aside">
-        <p class="eyebrow">At a glance</p>
-        <dl>
-          <div><dt>Users, first night</dt><dd>10</dd></div>
-          <div><dt>Requests, first night</dt><dd>70+</dd></div>
-          <div><dt>Original backend</dt><dd>Rails</dd></div>
-          <div><dt>Mobile rebuild</dt><dd>Flutter</dd></div>
-        </dl>
-      </aside>
+  <div slot="aside">
+    <p class="eyebrow">At a glance</p>
+    <dl>
+      <div><dt>Users, first night</dt><dd>10</dd></div>
+      <div><dt>Requests, first night</dt><dd>70+</dd></div>
+      <div><dt>Original backend</dt><dd>Rails</dd></div>
+      <div><dt>Mobile rebuild</dt><dd>Flutter</dd></div>
+    </dl>
+  </div>
 
-      <article class="case-study__prose">
         <p class="eyebrow">The beginning</p>
         <h2>An idea with a real audience.</h2>
         <p>
@@ -186,10 +174,8 @@ const description =
           in me had a profound impact on my life and the developer I became. I
           carry that belief into the work I do today.
         </p>
-      </article>
-    </div>
-  </main>
-</BaseLayout>
+
+</CaseStudyLayout>
 
 <style>
   .case-study {

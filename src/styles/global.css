@@ -587,11 +587,25 @@ a {
   border-radius: var(--radius-lg);
   background: var(--color-panel-fill);
 }
-.capabilities__intro > p:last-child {
+.capabilities__intro > p {
   max-width: 30rem;
   margin: 1.6rem 0 0;
   color: var(--muted);
   line-height: 1.7;
+}
+.approach-case-study {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+  color: var(--color-text);
+  font-size: 0.85rem;
+}
+.approach-case-study svg {
+  transition: transform 180ms ease;
+}
+.approach-case-study:hover svg {
+  transform: translateX(0.2rem);
 }
 .capability-grid {
   display: grid;

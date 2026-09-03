@@ -1,0 +1,243 @@
+---
+import CaseStudyLayout from "../../components/CaseStudyLayout.astro";
+
+const title = "Modernizing Tomahawk’s Android App — Derek DiLeo";
+const description =
+  "How I evolved a real-time Android vehicle status feature from Java and XML into testable, reusable Compose architecture.";
+---
+
+<CaseStudyLayout
+  title={title}
+  description={description}
+  backHref="/#approach"
+  eyebrow="Android · Kotlin · Jetpack Compose"
+  heading="Modernizing Tomahawk’s Android app, one feature at a time."
+  intro="I evolved a real-time vehicle status card from imperative Java and XML into a reusable, testable feature built around ViewModels, Kotlin Flows, domain use cases, and Jetpack Compose."
+>
+  <div slot="meta" class="case-study__meta">
+        <span>Role</span>
+        <strong>Android engineer · UI architecture owner</strong>
+        <span>Scope</span>
+        <strong>Incremental modernization</strong>
+  </div>
+
+  <div slot="aside">
+    <p class="eyebrow">At a glance</p>
+    <dl>
+      <div><dt>Feature passes</dt><dd>2</dd></div>
+      <div><dt>Coordinate formats</dt><dd>5</dd></div>
+      <div><dt>Tests added by the team</dt><dd>3,000+</dd></div>
+      <div><dt>Shared location use case</dt><dd>2 cards</dd></div>
+    </dl>
+  </div>
+
+        <p class="eyebrow">The starting point</p>
+        <h2>A real-time feature in a legacy UI.</h2>
+        <p>
+          When I joined the team, the application was exclusively imperative
+          Java. Observer patterns were common, with
+          LiveData and Android Observable fields carrying state through the UI.
+          Data access often
+          went through static singleton calls such as{" "}
+          <code>EntityDatabase.instance.getFoo()</code>. The AgentStatusCard
+          used an XML layout with view binding and a Java state holder.
+        </p>
+        <p>
+          My first production use of Jetpack Compose came through automated
+          vehicle-pairing wizards. These focused workflows were separate
+          Activities launched from the main application, replacing a
+          CLI-driven pairing process with guided automation. They gave me a
+          contained place to establish Compose and ViewModel patterns. Once the
+          approach worked, I used that foundation to convince the team to move
+          the main application toward Jetpack and modern Android development.
+        </p>
+        <p>
+          The card is the operator’s view of the vehicle currently being
+          controlled. It combines
+          live position, ground speed, throttle position when available, energy
+          state, signal ratio, vehicle identity, and control mode in one compact
+          surface. Small changes in the underlying node data can affect several
+          pieces of UI at once, so the feature was a useful place to establish
+          a better pattern.
+        </p>
+
+        <p class="eyebrow">Pass one</p>
+        <h2>Modernize the surface without stopping delivery.</h2>
+        <p>
+          The first pass introduced a ViewModel and Jetpack Compose while
+          preserving the feature’s existing behavior. The ViewModel became the
+          boundary between the data being observed and the UI state rendered by
+          Compose, replacing the direct coupling of the old XML implementation.
+          The Composable obtains that ViewModel through Hilt, keeping
+          construction and dependencies outside the UI itself.
+        </p>
+        <p>
+          This was an incremental change rather than a rewrite. The application
+          is large and still uses a hybrid navigation and UI stack, so features
+          are being migrated one piece at a time. New development is Compose
+          and ViewModel-first, while existing screens move forward through
+          carefully bounded interop.
+        </p>
+
+        <p class="eyebrow">Pass two</p>
+        <h2>Turn the feature into a pattern.</h2>
+        <p>
+          About a year later, after deepening my experience with Kotlin,
+          architecture, and modern Android practices, I revisited the card. I
+          extracted business logic into domain-layer use cases and added Kotlin
+          unit tests alongside Jetpack Compose UI tests.
+        </p>
+        <p>
+          Node data is exposed as a Flow. When the selected vehicle changes,
+          the Flow emits and the ViewModel updates only the UI state affected by
+          that change. Position formatting is handled by{" "}
+          <code>ObserveLocationUseCase(locationId)</code>, which returns the
+          current location as a string in the user’s preferred format: DD, DMS,
+          MGRS, DMDM, or UTM.
+        </p>
+        <p>
+          The same use case was later reused by UserStatusCard for the
+          operator’s own position, ground speed, and altitude. Both cards now
+          share the same coordinate-formatting behavior; the call site simply
+          supplies a different location ID.
+        </p>
+
+        <p class="eyebrow">The result</p>
+        <h2>Safer changes, faster feedback.</h2>
+        <p>
+          Future changes are easier because new work follows a standard pattern:
+          observe the relevant data, map it into explicit, immutable UI state,
+          and render that state with Compose. Shared behavior lives in reusable
+          domain use cases instead of being duplicated across screens.
+        </p>
+        <p>
+          Regression risk is lower because the feature is covered at both the
+          unit and UI levels. In under a year, my team and I grew the
+          Java/Kotlin unit-test suite from zero tests to more than 3,000, and
+          that coverage continues to grow. It makes it possible to change
+          architecture and behavior with confidence while continuing to deliver
+          product work.
+        </p>
+
+        <p class="eyebrow">What I would do next</p>
+        <h2>Make the migration path intentional from day one.</h2>
+        <p>
+          If I were starting this work today, I would establish the domain and
+          UI-state contracts before migrating the first screen, then use those
+          contracts to guide each incremental feature pass. I would also define
+          test seams around platform data earlier so new screens could begin
+          with fakes and deterministic tests instead of adding them later.
+        </p>
+  
+</CaseStudyLayout>
+
+<style>
+  .case-study {
+    padding-top: 10rem;
+    padding-bottom: 7rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+  .case-study__hero {
+    max-width: 60rem;
+    margin: 5rem 0 4rem;
+  }
+  h1 {
+    max-width: 11ch;
+    margin: 1rem 0 1.75rem;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+  .case-study__intro {
+    max-width: 40rem;
+    color: var(--color-text-secondary);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.65;
+  }
+  .case-study__meta {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    gap: 0.5rem 1.2rem;
+    margin-top: 3rem;
+    color: var(--color-text-muted);
+    font: 0.68rem/1.3 var(--font-mono);
+    text-transform: uppercase;
+  }
+  .case-study__meta strong {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+  .case-study__body {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.6fr) minmax(0, 1.4fr);
+    gap: clamp(3rem, 10vw, 9rem);
+    margin-top: 7rem;
+  }
+  .case-study__aside {
+    position: sticky;
+    top: 8rem;
+    align-self: start;
+  }
+  dl {
+    margin: 1.5rem 0 0;
+  }
+  dl div {
+    padding: 1rem 0;
+    border-top: 1px solid var(--color-line);
+  }
+  dt {
+    color: var(--color-text-muted);
+    font: 0.62rem/1.3 var(--font-mono);
+    text-transform: uppercase;
+  }
+  dd {
+    margin: 0.35rem 0 0;
+    color: var(--color-text);
+    font-size: 1.1rem;
+  }
+  .case-study__prose {
+    max-width: 42rem;
+  }
+  .case-study__prose .eyebrow:not(:first-child) {
+    margin-top: 5rem;
+  }
+  .case-study__prose h2 {
+    max-width: 15ch;
+    margin: 0.8rem 0 1.5rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+  .case-study__prose p:not(.eyebrow) {
+    color: var(--color-text-secondary);
+    line-height: 1.85;
+  }
+  code {
+    color: var(--color-text);
+    font: 0.9em var(--font-mono);
+  }
+  @media (max-width: 700px) {
+    .case-study {
+      padding-top: 8rem;
+    }
+    .case-study__hero {
+      margin-top: 4rem;
+    }
+    .case-study__meta {
+      grid-template-columns: max-content 1fr;
+    }
+    .case-study__body {
+      grid-template-columns: 1fr;
+      margin-top: 5rem;
+    }
+    .case-study__aside {
+      position: static;
+    }
+  }
+</style>

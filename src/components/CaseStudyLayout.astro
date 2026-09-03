@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "./Icon.astro";
+import { ICON_SIZES } from "../data/iconSizes";
+
+interface Props {
+  title: string;
+  description: string;
+  backHref?: string;
+  backLabel?: string;
+  eyebrow: string;
+  heading: string;
+  intro: string;
+}
+
+const {
+  title,
+  description,
+  backHref = "/#projects",
+  backLabel = "Back to selected work",
+  eyebrow,
+  heading,
+  intro,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="case-study container" id="top">
+    <a class="back-link" href={backHref}>
+      <Icon name="arrow-left" size={ICON_SIZES.sm} /> {backLabel}
+    </a>
+
+    <header class="case-study__hero">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{heading}</h1>
+      <p class="case-study__intro">{intro}</p>
+      <slot name="meta" />
+    </header>
+
+    <div class="case-study__body">
+      <aside class="case-study__aside">
+        <slot name="aside" />
+      </aside>
+      <article class="case-study__prose">
+        <slot />
+      </article>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .case-study {
+    padding-top: 10rem;
+    padding-bottom: 7rem;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+  }
+  .case-study__hero {
+    max-width: 60rem;
+    margin: 5rem 0 4rem;
+  }
+  h1 {
+    max-width: 11ch;
+    margin: 1rem 0 1.75rem;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+  }
+  .case-study__intro {
+    max-width: 40rem;
+    color: var(--color-text-secondary);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.65;
+  }
+  .case-study__body {
+    display: grid;
+    grid-template-columns: minmax(12rem, 0.6fr) minmax(0, 1.4fr);
+    gap: clamp(3rem, 10vw, 9rem);
+    margin-top: 7rem;
+  }
+  .case-study__aside {
+    position: sticky;
+    top: 8rem;
+    align-self: start;
+  }
+  .case-study__prose {
+    max-width: 42rem;
+  }
+  .case-study__prose .eyebrow:not(:first-child) {
+    margin-top: 5rem;
+  }
+  .case-study__prose h2 {
+    max-width: 15ch;
+    margin: 0.8rem 0 1.5rem;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+  .case-study__prose p:not(.eyebrow) {
+    color: var(--color-text-secondary);
+    line-height: 1.85;
+  }
+  .case-study__prose code {
+    color: var(--color-text);
+    font: 0.9em var(--font-mono);
+  }
+  @media (max-width: 700px) {
+    .case-study {
+      padding-top: 8rem;
+    }
+    .case-study__hero {
+      margin-top: 4rem;
+    }
+    .case-study__body {
+      grid-template-columns: 1fr;
+      margin-top: 5rem;
+    }
+    .case-study__aside {
+      position: static;
+    }
+  }
+</style>
