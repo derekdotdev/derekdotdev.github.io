@@ -11,7 +11,7 @@ const description =
 <BaseLayout title={title} description={description}>
   <main class="case-study container" id="top">
     <a class="back-link" href="/#projects">
-      <Icon name="arrow" size={ICON_SIZES.sm} /> Back to selected work
+      <Icon name="arrow-left" size={ICON_SIZES.sm} /> Back to selected work
     </a>
 
     <header class="case-study__hero">
@@ -204,10 +204,6 @@ const description =
     color: var(--color-text-muted);
     font-size: 0.85rem;
   }
-  .back-link svg {
-    transform: rotate(180deg);
-  }
-
   .case-study__hero {
     max-width: 60rem;
     margin: 5rem 0 4rem;
