@@ -23,7 +23,7 @@ export const projects: Project[] = [
     imageAlt: "Request Live Music mobile application screens",
     stack: ["Flutter", "Dart", "Firebase", "Cloud Firestore"],
     github: "https://github.com/derekdotdev/request-live-mobile",
-    caseStudy: "/case-studies/request-live-music/",
+    caseStudy: "/blog/request-live-music/",
     featured: true,
   },
   {
