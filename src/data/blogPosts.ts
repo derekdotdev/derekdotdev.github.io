@@ -7,18 +7,18 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
-    title: "From CLI commands to pairing wizards",
-    description:
-      "How a guided Android pairing experience turned radio configuration, vehicle discovery, and connection into a repeatable operator workflow.",
-    eyebrow: "Android · Vehicle integration",
-    href: "/blog/vehicle-pairing-wizards/",
-  },
-  {
     title: "Modernizing Tomahawk’s Android app, one feature at a time.",
     description:
       "How a focused Compose experiment became a repeatable path from imperative Java to testable, reusable Android architecture.",
     eyebrow: "Android · Architecture",
     href: "/blog/modernizing-android-architecture/",
+  },
+  {
+    title: "From CLI commands to pairing wizards",
+    description:
+      "How a guided Android pairing experience turned radio configuration, vehicle discovery, and connection into a repeatable operator workflow.",
+    eyebrow: "Android · Vehicle integration",
+    href: "/blog/vehicle-pairing-wizards/",
   },
   {
     title: "An idea that started a career.",
