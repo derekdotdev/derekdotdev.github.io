@@ -34,9 +34,9 @@ const description =
   <h2>Discovery worked. The workflow didn’t.</h2>
   <p>
     Implementers developed against our SDK and, when a vehicle was discovered,
-    the system automatically created a node that became visible and
-    controllable in Kinesis. That was a good integration experience for the
-    people building plugins, but it left too much work to the operator.
+    the system automatically created a node that became visible and controllable
+    in Kinesis. That was a good integration experience for the people building
+    plugins, but it left too much work to the operator.
   </p>
   <p>
     Configuring a ground radio through a web API, or worse, a command line, was
@@ -54,11 +54,10 @@ const description =
     application by choice in college, but Android was a new domain. Most of my
     deeper learning happened outside coursework; classroom projects often
     stopped at CLI applications. My first eight months at Tomahawk were spent
-    inheriting a Redwood.js customer
-    portal built with React and TypeScript, then carrying it from infancy
-    through production deployment in AWS GovCloud. I then spent roughly six
-    months actively contributing to Kinesis while building familiarity with
-    its codebase before taking on the pairing work.
+    inheriting a Redwood.js customer portal built with React and TypeScript,
+    then carrying it from infancy through production deployment in AWS GovCloud.
+    I then spent roughly six months actively contributing to Kinesis while
+    building familiarity with its codebase before taking on the pairing work.
   </p>
   <p>
     The first hurdle was not the screen itself. Each pairing wizard was a
@@ -66,16 +65,16 @@ const description =
     through an explicit Intent, so I first had to establish how a plugin could
     advertise that a wizard existed and how Kinesis could launch it on demand.
     We started with one vehicle, where I owned the Android UI and architecture,
-    partnered with an integrator who
-    handled much of the C++ integration with the vehicle itself, and crossed
-    the JNI boundary when the feature required it.
+    partnered with an integrator who handled much of the C++ integration with
+    the vehicle itself, and crossed the JNI boundary when the feature required
+    it.
   </p>
   <p>
     Once that foundation was working, I drew on established Android patterns,
     including Philipp Lackner’s educational content and public examples, and
-    adapted those techniques to our workflows. The first wizard took about
-    nine months; after the pattern was established, the next three took only a
-    few weeks each.
+    adapted those techniques to our workflows. The first wizard took about nine
+    months; after the pattern was established, the next three took only a few
+    weeks each.
   </p>
   <p>
     The first pairing wizard turned those disconnected steps into one guided
@@ -87,13 +86,13 @@ const description =
     Radios were identified by IP address, which let Kinesis reuse the same
     physical radio across different vehicles. Each vehicle could have its own
     saved configuration—often a different channel. Enabling one of those saved
-    configurations kicked off discovery: Kinesis located the radio, applied
-    its settings, and attempted to discover the vehicle. Once the vehicle was
-    found, the plugin created a node that Kinesis could display and control.
-    When a connection needed to be retried, the operator could start the
-    process on demand instead of reconstructing the setup from memory or
-    repeating manual commands. In practice, that means setting up the kit
-    ahead of time, then connecting to it quickly when it is needed.
+    configurations kicked off discovery: Kinesis located the radio, applied its
+    settings, and attempted to discover the vehicle. Once the vehicle was found,
+    the plugin created a node that Kinesis could display and control. When a
+    connection needed to be retried, the operator could start the process on
+    demand instead of reconstructing the setup from memory or repeating manual
+    commands. In practice, that means setting up the kit ahead of time, then
+    connecting to it quickly when it is needed.
   </p>
 
   <p class="eyebrow">The platform model</p>
@@ -108,11 +107,11 @@ const description =
   <p>
     Building that dynamic list was a learning experience of its own. At the
     time, I had not yet worked with Room, was still developing my fluency with
-    Kotlin Flows, and had not established Hilt in the main application. I used
-    a static registry with an observer-based pub/sub pattern to notify Kinesis
-    when new pairing Activities were available. It solved the immediate
-    problem, but it remains technical debt—an honest reminder that a working
-    first step is not always the final architecture.
+    Kotlin Flows, and had not established Hilt in the main application. I used a
+    static registry with an observer-based pub/sub pattern to notify Kinesis
+    when new pairing Activities were available. It solved the immediate problem,
+    but it remains technical debt—an honest reminder that a working first step
+    is not always the final architecture.
   </p>
   <p>
     That model kept vendor-specific pairing logic within each plugin while
@@ -130,20 +129,22 @@ const description =
     most important work to the user.
   </p>
   <p>
-    I learned a great deal while building the first wizard, and even more when
-    I revisited the code later. I found public mutable properties, unnecessary{" "}
-    <code>suspend</code> functions, long methods carrying too many
-    responsibilities, and domain use cases that did little more than wrap a
-    repository. Seeing those patterns clearly today is a reminder of how much
-    my engineering judgment has grown. I’m grateful for that perspective: the
-    distance between the first implementation and how I would build it today is
-    one of the clearest measures of how far I’ve come.
+    I learned a great deal while building the first wizard, and even more when I
+    revisited the code later. I found public mutable properties, unnecessary{
+      " "
+    }
+    <code>suspend</code> functions, long methods carrying too many responsibilities,
+    and domain use cases that did little more than wrap a repository. Seeing those
+    patterns clearly today is a reminder of how much my engineering judgment has grown.
+    I’m grateful for that perspective: the distance between the first implementation
+    and how I would build it today is one of the clearest measures of how far I’ve
+    come.
   </p>
   <p>
     I was also fortunate to have senior engineers I could lean on when I got
     stuck. They reinforced that the only silly question is the one you do not
-    ask, and taught me that every engineer is still learning—regardless of
-    title or years of experience. I carry that lesson forward whenever a junior
+    ask, and taught me that every engineer is still learning—regardless of title
+    or years of experience. I carry that lesson forward whenever a junior
     engineer comes to me for help: make the question welcome, work through the
     problem together, and leave them more confident than when they arrived.
   </p>

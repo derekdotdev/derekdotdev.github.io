@@ -23,9 +23,7 @@ export function initializeNavigation(): void {
   initializeSectionTracking(navigation, sectionLinks);
 }
 
-function initializeMobileMenu(
-  navigation: HTMLElement,
-): void {
+function initializeMobileMenu(navigation: HTMLElement): void {
   const menu = navigation.querySelector<HTMLElement>(".nav__links");
   const toggle =
     navigation.querySelector<HTMLButtonElement>(".nav__menu-toggle");

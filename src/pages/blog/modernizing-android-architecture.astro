@@ -15,10 +15,10 @@ const description =
   intro="I evolved a real-time vehicle status card from imperative Java and XML into a reusable, testable feature built around ViewModels, Kotlin Flows, domain use cases, and Jetpack Compose."
 >
   <div slot="meta" class="case-study__meta">
-        <span>Role</span>
-        <strong>Android engineer · UI architecture owner</strong>
-        <span>Scope</span>
-        <strong>Incremental modernization</strong>
+    <span>Role</span>
+    <strong>Android engineer · UI architecture owner</strong>
+    <span>Scope</span>
+    <strong>Incremental modernization</strong>
   </div>
 
   <div slot="aside">
@@ -31,137 +31,131 @@ const description =
     </dl>
   </div>
 
-        <p class="eyebrow">The starting point</p>
-        <h2>A real-time feature in a legacy UI.</h2>
-        <p>
-          When I joined the team, the application was exclusively imperative
-          Java. Observer patterns were common, with
-          LiveData and Android Observable fields carrying state through the UI.
-          Data access often
-          went through static singleton calls such as{" "}
-          <code>EntityDatabase.instance.getFoo()</code>. The original
-          AgentAvatar implementation, which represented a controllable asset,
-          was a monolith: an XML layout and Java state holder wired together
-          with Observable fields and LiveData.
-        </p>
-        <p>
-          The application is Kinesis, Tomahawk’s flagship Android ground
-          control system for uncrewed systems. It gives operators a unified
-          interface for vehicle control and situational awareness across air
-          and ground platforms, so the status surfaces need to stay accurate as
-          live data changes.
-        </p>
-        <p>
-          My first production use of Jetpack Compose came through automated
-          vehicle-pairing wizards. Kinesis launched vendor plugins at startup;
-          each plugin began its discovery loop and advertised the pairing
-          Activities it supported. Kinesis compiled those advertisements into
-          a list so users could choose the appropriate wizard on demand,
-          replacing a CLI-driven pairing process with guided automation.
-          That contained workflow gave me a place to establish Compose and
-          ViewModel patterns. Once the approach worked, I used that foundation
-          to convince the team to move the main application toward Jetpack and
-          modern Android development.
-        </p>
-        <p>
-          The card is the operator’s view of the vehicle currently being
-          controlled. It combines
-          live position, ground speed, throttle position when available, energy
-          state, signal ratio, vehicle identity, and control mode in one compact
-          surface. Small changes in the underlying node data can affect several
-          pieces of UI at once, so the feature was a useful place to establish
-          a better pattern.
-        </p>
+  <p class="eyebrow">The starting point</p>
+  <h2>A real-time feature in a legacy UI.</h2>
+  <p>
+    When I joined the team, the application was exclusively imperative Java.
+    Observer patterns were common, with LiveData and Android Observable fields
+    carrying state through the UI. Data access often went through static
+    singleton calls such as{" "}
+    <code>EntityDatabase.instance.getFoo()</code>. The original AgentAvatar
+    implementation, which represented a controllable asset, was a monolith: an
+    XML layout and Java state holder wired together with Observable fields and
+    LiveData.
+  </p>
+  <p>
+    The application is Kinesis, Tomahawk’s flagship Android ground control
+    system for uncrewed systems. It gives operators a unified interface for
+    vehicle control and situational awareness across air and ground platforms,
+    so the status surfaces need to stay accurate as live data changes.
+  </p>
+  <p>
+    My first production use of Jetpack Compose came through automated
+    vehicle-pairing wizards. Kinesis launched vendor plugins at startup; each
+    plugin began its discovery loop and advertised the pairing Activities it
+    supported. Kinesis compiled those advertisements into a list so users could
+    choose the appropriate wizard on demand, replacing a CLI-driven pairing
+    process with guided automation. That contained workflow gave me a place to
+    establish Compose and ViewModel patterns. Once the approach worked, I used
+    that foundation to convince the team to move the main application toward
+    Jetpack and modern Android development.
+  </p>
+  <p>
+    The card is the operator’s view of the vehicle currently being controlled.
+    It combines live position, ground speed, throttle position when available,
+    energy state, signal ratio, vehicle identity, and control mode in one
+    compact surface. Small changes in the underlying node data can affect
+    several pieces of UI at once, so the feature was a useful place to establish
+    a better pattern.
+  </p>
 
-        <p class="eyebrow">Pass one</p>
-        <h2>Modernize the surface without stopping delivery.</h2>
-        <p>
-          The first pass introduced a ViewModel and Jetpack Compose while
-          preserving the feature’s existing behavior. The ViewModel became the
-          boundary between the data being observed and the UI state rendered by
-          Compose, replacing the direct coupling of the old XML implementation.
-          The Composable obtains that ViewModel through Hilt, keeping
-          construction and dependencies outside the UI itself.
-        </p>
-        <p>
-          This was an incremental change rather than a rewrite. The application
-          is large and still uses a hybrid navigation and UI stack, so features
-          are being migrated one piece at a time. New development is Compose
-          and ViewModel-first, while existing screens move forward through
-          carefully bounded interop.
-        </p>
+  <p class="eyebrow">Pass one</p>
+  <h2>Modernize the surface without stopping delivery.</h2>
+  <p>
+    The first pass introduced a ViewModel and Jetpack Compose while preserving
+    the feature’s existing behavior. The ViewModel became the boundary between
+    the data being observed and the UI state rendered by Compose, replacing the
+    direct coupling of the old XML implementation. The Composable obtains that
+    ViewModel through Hilt, keeping construction and dependencies outside the UI
+    itself.
+  </p>
+  <p>
+    This was an incremental change rather than a rewrite. The application is
+    large and still uses a hybrid navigation and UI stack, so features are being
+    migrated one piece at a time. New development is Compose and
+    ViewModel-first, while existing screens move forward through carefully
+    bounded interop.
+  </p>
 
-        <p class="eyebrow">Pass two</p>
-        <h2>Turn the feature into a pattern.</h2>
-        <p>
-          About a year later, after deepening my experience with Kotlin,
-          architecture, and modern Android practices, I revisited the card. By
-          then, I had read Robert C. Martin’s <em>Clean Code</em>,
-          <em>Clean Architecture</em>, and <em>The Clean Coder</em>, which gave
-          me a sharper vocabulary for the boundaries I wanted to establish.
-          While waiting on unrelated review and
-          integration work, I used the available time to revisit the feature
-          and prove that it could be better.
-        </p>
-        <p>
-          I moved persistence behind a domain repository and data-layer
-          implementation backed by Room, then extracted business logic into
-          domain-layer use cases. Following Android’s recommended DAO
-          conventions, one-shot reads and writes are <code>suspend</code>,
-          while observable streams return non-suspending <code>Flows</code>. I
-          also added Kotlin unit tests alongside Jetpack Compose UI tests. The data
-          implementation is a practical example of dependency inversion: the
-          domain depends on an interface, while Room remains a replaceable
-          infrastructure detail behind it. In other words, higher-level code
-          depends on abstractions, not concretions.
-        </p>
-        <p>
-          Node data is exposed as a Flow. When the user changes vehicles—or an
-          observed property of the current vehicle changes, such as speed or
-          energy ratio—the Flow emits and the ViewModel updates only the UI
-          state affected by that change. Position formatting is handled by{" "}
-          <code>ObserveLocationUseCase(locationId)</code>, which returns the
-          current location as a string in the user’s preferred format: DD, DMS,
-          MGRS, DMDM, or UTM.
-        </p>
-        <p>
-          The same use case was later reused by UserStatusCard for the
-          operator’s own position. The call site supplies a location ID, and
-          the use case emits a new formatted location string whenever that
-          location changes or the user’s preferred coordinate format changes.
-          The preference persists across restarts through{" "}
-          <code>DataStore&lt;Preferences&gt;</code>, also abstracted behind a
-          domain interface and data-layer implementation.
-        </p>
+  <p class="eyebrow">Pass two</p>
+  <h2>Turn the feature into a pattern.</h2>
+  <p>
+    About a year later, after deepening my experience with Kotlin, architecture,
+    and modern Android practices, I revisited the card. By then, I had read
+    Robert C. Martin’s <em>Clean Code</em>,
+    <em>Clean Architecture</em>, and <em>The Clean Coder</em>, which gave me a
+    sharper vocabulary for the boundaries I wanted to establish. While waiting
+    on unrelated review and integration work, I used the available time to
+    revisit the feature and prove that it could be better.
+  </p>
+  <p>
+    I moved persistence behind a domain repository and data-layer implementation
+    backed by Room, then extracted business logic into domain-layer use cases.
+    Following Android’s recommended DAO conventions, one-shot reads and writes
+    are <code>suspend</code>, while observable streams return non-suspending <code
+      >Flows</code
+    >. I also added Kotlin unit tests alongside Jetpack Compose UI tests. The
+    data implementation is a practical example of dependency inversion: the
+    domain depends on an interface, while Room remains a replaceable
+    infrastructure detail behind it. In other words, higher-level code depends
+    on abstractions, not concretions.
+  </p>
+  <p>
+    Node data is exposed as a Flow. When the user changes vehicles—or an
+    observed property of the current vehicle changes, such as speed or energy
+    ratio—the Flow emits and the ViewModel updates only the UI state affected by
+    that change. Position formatting is handled by{" "}
+    <code>ObserveLocationUseCase(locationId)</code>, which returns the current
+    location as a string in the user’s preferred format: DD, DMS, MGRS, DMDM, or
+    UTM.
+  </p>
+  <p>
+    The same use case was later reused by UserStatusCard for the operator’s own
+    position. The call site supplies a location ID, and the use case emits a new
+    formatted location string whenever that location changes or the user’s
+    preferred coordinate format changes. The preference persists across restarts
+    through{" "}
+    <code>DataStore&lt;Preferences&gt;</code>, also abstracted behind a domain
+    interface and data-layer implementation.
+  </p>
 
-        <p class="eyebrow">The result</p>
-        <h2>Safer changes, faster feedback.</h2>
-        <p>
-          Future changes are easier because new work follows a standard pattern:
-          observe the relevant data, map it into explicit, immutable UI state,
-          and render that state with Compose. Shared behavior lives in reusable
-          domain use cases instead of being duplicated across screens.
-        </p>
-        <p>
-          Regression risk is lower because the feature is covered at both the
-          unit and UI levels. In under a year, my team and I grew the
-          Java/Kotlin unit-test suite from zero tests to more than 3,000, and
-          that coverage continues to grow. Software is never really finished;
-          it evolves as the product, platform, and team evolve. Keeping each
-          piece clean, modular, and testable lets us modernize architecture,
-          evolve behavior, and refactor safely without slowing product delivery.
-        </p>
+  <p class="eyebrow">The result</p>
+  <h2>Safer changes, faster feedback.</h2>
+  <p>
+    Future changes are easier because new work follows a standard pattern:
+    observe the relevant data, map it into explicit, immutable UI state, and
+    render that state with Compose. Shared behavior lives in reusable domain use
+    cases instead of being duplicated across screens.
+  </p>
+  <p>
+    Regression risk is lower because the feature is covered at both the unit and
+    UI levels. In under a year, my team and I grew the Java/Kotlin unit-test
+    suite from zero tests to more than 3,000, and that coverage continues to
+    grow. Software is never really finished; it evolves as the product,
+    platform, and team evolve. Keeping each piece clean, modular, and testable
+    lets us modernize architecture, evolve behavior, and refactor safely without
+    slowing product delivery.
+  </p>
 
-        <p class="eyebrow">What I’d carry into the next migration</p>
-        <h2>The next migration would start with the seams.</h2>
-        <p>
-          If I were starting this work today, I would establish the domain and
-          UI-state contracts before migrating the first screen, then use those
-          contracts to guide each incremental feature pass. I would also define
-          test seams around platform data earlier so new screens could begin
-          with fakes and deterministic tests instead of adding them later.
-        </p>
-  
+  <p class="eyebrow">What I’d carry into the next migration</p>
+  <h2>The next migration would start with the seams.</h2>
+  <p>
+    If I were starting this work today, I would establish the domain and
+    UI-state contracts before migrating the first screen, then use those
+    contracts to guide each incremental feature pass. I would also define test
+    seams around platform data earlier so new screens could begin with fakes and
+    deterministic tests instead of adding them later.
+  </p>
 </CaseStudyLayout>
 
 <style>

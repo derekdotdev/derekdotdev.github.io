@@ -16,18 +16,18 @@ const description =
   intro="Request Live Music began with a problem I experienced behind the booth: trying to understand a song request while counting beats, reading the room, and planning the next few tracks. It became my first real product, my first production crash, and the project that convinced me I could become a developer."
 >
   <div slot="meta" class="case-study__meta">
-        <span>Role</span>
-        <strong>Product builder</strong>
-        <span>Timeline</span>
-        <strong>2019–2022</strong>
-        <span>Source</span>
-        <a
-          href="https://github.com/derekdotdev/request-live-mobile"
-          target="_blank"
-          rel="noreferrer"
-        >
-          GitHub <Icon name="arrow" size={ICON_SIZES.xs} />
-        </a>
+    <span>Role</span>
+    <strong>Product builder</strong>
+    <span>Timeline</span>
+    <strong>2019–2022</strong>
+    <span>Source</span>
+    <a
+      href="https://github.com/derekdotdev/request-live-mobile"
+      target="_blank"
+      rel="noreferrer"
+    >
+      GitHub <Icon name="arrow" size={ICON_SIZES.xs} />
+    </a>
   </div>
 
   <div slot="aside">
@@ -40,141 +40,135 @@ const description =
     </dl>
   </div>
 
-        <p class="eyebrow">The beginning</p>
-        <h2>An idea with a real audience.</h2>
-        <p>
-          I was playing music at a bar and needed a better way to receive song
-          requests. A DJ is constantly counting beats, reading the room, and
-          preparing the next few songs based on how the crowd is responding.
-          Then someone might tap you on the shoulder and try to communicate a
-          request over the music—sometimes after a few drinks, sometimes across
-          a language barrier, and almost always while you were in the middle of
-          something else.
-        </p>
-        <p>
-          Nobody was doing anything wrong. The environment simply made a precise
-          conversation difficult. I wanted a way for someone to submit an
-          artist, title, and note from their phone, then give the entertainer a
-          clear request list to work from.
-        </p>
-        <p>
-          My friend Max—a former DJ who had become a developer—agreed to help me
-          build the first version, but only if I pair-programmed with him. He
-          saw something in me before I saw it in myself, and that decision
-          changed the direction of my life.
-        </p>
+  <p class="eyebrow">The beginning</p>
+  <h2>An idea with a real audience.</h2>
+  <p>
+    I was playing music at a bar and needed a better way to receive song
+    requests. A DJ is constantly counting beats, reading the room, and preparing
+    the next few songs based on how the crowd is responding. Then someone might
+    tap you on the shoulder and try to communicate a request over the
+    music—sometimes after a few drinks, sometimes across a language barrier, and
+    almost always while you were in the middle of something else.
+  </p>
+  <p>
+    Nobody was doing anything wrong. The environment simply made a precise
+    conversation difficult. I wanted a way for someone to submit an artist,
+    title, and note from their phone, then give the entertainer a clear request
+    list to work from.
+  </p>
+  <p>
+    My friend Max—a former DJ who had become a developer—agreed to help me build
+    the first version, but only if I pair-programmed with him. He saw something
+    in me before I saw it in myself, and that decision changed the direction of
+    my life.
+  </p>
 
-        <p class="eyebrow">The first production test</p>
-        <h2>Ten users. Seventy requests. One crash.</h2>
-        <p>
-          Our first version was a Ruby on Rails web app. I played music videos
-          at the bar and streamed the request site’s URL across the screens so
-          people could participate while I was DJing.
-        </p>
-        <p>
-          Authentication supported Google and Facebook OAuth2 sign-in as well as
-          email registration and login. Once authenticated, a listener could
-          submit an artist, title, and note, then receive confirmation that the
-          request had been received.
-        </p>
-        <p>
-          On the first night, people submitted more than seventy requests. I was
-          thrilled—and then the app crashed.
-        </p>
-        <p>
-          Before reading the error message, I already knew what had happened. We
-          generated user thumbnails from their Google and Facebook profile
-          images, but one of our users had registered with email. That account
-          had no social profile image to fall back on.
-        </p>
-        <p>
-          It was a small bug, but recognizing it before opening the logs was a
-          major moment for me. When I told Max about the night, including the
-          success and the failure, he told me I would one day make a great
-          developer.
-        </p>
+  <p class="eyebrow">The first production test</p>
+  <h2>Ten users. Seventy requests. One crash.</h2>
+  <p>
+    Our first version was a Ruby on Rails web app. I played music videos at the
+    bar and streamed the request site’s URL across the screens so people could
+    participate while I was DJing.
+  </p>
+  <p>
+    Authentication supported Google and Facebook OAuth2 sign-in as well as email
+    registration and login. Once authenticated, a listener could submit an
+    artist, title, and note, then receive confirmation that the request had been
+    received.
+  </p>
+  <p>
+    On the first night, people submitted more than seventy requests. I was
+    thrilled—and then the app crashed.
+  </p>
+  <p>
+    Before reading the error message, I already knew what had happened. We
+    generated user thumbnails from their Google and Facebook profile images, but
+    one of our users had registered with email. That account had no social
+    profile image to fall back on.
+  </p>
+  <p>
+    It was a small bug, but recognizing it before opening the logs was a major
+    moment for me. When I told Max about the night, including the success and
+    the failure, he told me I would one day make a great developer.
+  </p>
 
-        <p class="eyebrow">The rebuild</p>
-        <h2>From working prototype to multiplatform experiment.</h2>
-        <p>
-          At the time, I was studying Java in college and had not yet
-          encountered Kotlin or Jetpack Compose. I wanted to build a mobile
-          version for multiple platforms, and Flutter offered the most
-          approachable path to a shared codebase. I learned Dart and built the
-          app myself.
-        </p>
-        <p>
-          Riverpod was my first real experience with dependency injection. It
-          felt like magic: not every dependency had to be passed down through
-          every parent and child. Some dependencies could simply be available
-          where they were needed. That experience taught me to recognize when
-          shared behavior deserves an explicit dependency boundary.
-        </p>
-        <p>
-          Flutter also introduced me to the difference between stateful and
-          stateless UI components. I was learning to decide which pieces of a
-          screen should own state and which should simply render the state they
-          received. That idea maps directly to how I approach Jetpack Compose
-          today: keep state ownership deliberate, hoist it when it belongs
-          elsewhere, and make reusable components predictable.
-        </p>
-        <p>
-          The rebuild also used Firebase and Cloud Firestore for the backend
-          services and request data. Working with a hosted backend let me focus
-          on the product experience while learning how authentication, shared
-          state, and real-time data fit together across a multiplatform app.
-        </p>
-        <p>
-          I imagined a product where listeners could use the service for free
-          with advertising, while entertainers could subscribe for access to
-          richer tools: tips through services like Venmo or Cash App, direct
-          messaging, social links, entertainer follows, and scheduled events. A
-          couple could submit wedding requests ahead of time so the DJ could
-          prepare a complete library before the event.
-        </p>
+  <p class="eyebrow">The rebuild</p>
+  <h2>From working prototype to multiplatform experiment.</h2>
+  <p>
+    At the time, I was studying Java in college and had not yet encountered
+    Kotlin or Jetpack Compose. I wanted to build a mobile version for multiple
+    platforms, and Flutter offered the most approachable path to a shared
+    codebase. I learned Dart and built the app myself.
+  </p>
+  <p>
+    Riverpod was my first real experience with dependency injection. It felt
+    like magic: not every dependency had to be passed down through every parent
+    and child. Some dependencies could simply be available where they were
+    needed. That experience taught me to recognize when shared behavior deserves
+    an explicit dependency boundary.
+  </p>
+  <p>
+    Flutter also introduced me to the difference between stateful and stateless
+    UI components. I was learning to decide which pieces of a screen should own
+    state and which should simply render the state they received. That idea maps
+    directly to how I approach Jetpack Compose today: keep state ownership
+    deliberate, hoist it when it belongs elsewhere, and make reusable components
+    predictable.
+  </p>
+  <p>
+    The rebuild also used Firebase and Cloud Firestore for the backend services
+    and request data. Working with a hosted backend let me focus on the product
+    experience while learning how authentication, shared state, and real-time
+    data fit together across a multiplatform app.
+  </p>
+  <p>
+    I imagined a product where listeners could use the service for free with
+    advertising, while entertainers could subscribe for access to richer tools:
+    tips through services like Venmo or Cash App, direct messaging, social
+    links, entertainer follows, and scheduled events. A couple could submit
+    wedding requests ahead of time so the DJ could prepare a complete library
+    before the event.
+  </p>
 
-        <p class="eyebrow">What it taught me</p>
-        <h2>Build the idea. Then learn what it needs next.</h2>
-        <p>
-          The Flutter app had no meaningful test suite, mocks, or fakes. It did
-          not follow Clean Architecture, and the UI was designed by instinct
-          rather than a system. Eventually I reached the point where I could no
-          longer add value without bringing more experienced developers into the
-          project.
-        </p>
-        <p>
-          At the time, that felt like a limit. In retrospect, it was a useful
-          boundary. I had taken an idea from a conversation to a live product,
-          learned a new language and framework, and found the edge of my own
-          capabilities by building toward it.
-        </p>
-        <p class="eyebrow">Looking back</p>
-        <h2>What I would do differently today.</h2>
-        <p>
-          I would begin by separating the product into clear domain,
-          presentation, and data concerns. Request submission, entertainer
-          workflows, and authentication would each have explicit contracts
-          instead of coupling UI screens directly to backend services.
-        </p>
-        <p>
-          I would add tests before the first live event: unit tests for request
-          validation and state transitions, fakes for Firebase boundaries, and
-          UI tests for the flows a listener and entertainer use most. I would
-          also design the empty, loading, error, and offline states before
-          polishing the happy path.
-        </p>
-        <p>
-          Most importantly, I would treat the first release as a learning loop,
-          not a final verdict. The original app proved that people wanted the
-          experience. A stronger architecture would have made it safer to keep
-          learning from them.
-        </p>
-        <p>
-          Max is no longer here to see where that encouragement led. His belief
-          in me had a profound impact on my life and the developer I became. I
-          carry that belief into the work I do today.
-        </p>
-
+  <p class="eyebrow">What it taught me</p>
+  <h2>Build the idea. Then learn what it needs next.</h2>
+  <p>
+    The Flutter app had no meaningful test suite, mocks, or fakes. It did not
+    follow Clean Architecture, and the UI was designed by instinct rather than a
+    system. Eventually I reached the point where I could no longer add value
+    without bringing more experienced developers into the project.
+  </p>
+  <p>
+    At the time, that felt like a limit. In retrospect, it was a useful
+    boundary. I had taken an idea from a conversation to a live product, learned
+    a new language and framework, and found the edge of my own capabilities by
+    building toward it.
+  </p>
+  <p class="eyebrow">Looking back</p>
+  <h2>What I would do differently today.</h2>
+  <p>
+    I would begin by separating the product into clear domain, presentation, and
+    data concerns. Request submission, entertainer workflows, and authentication
+    would each have explicit contracts instead of coupling UI screens directly
+    to backend services.
+  </p>
+  <p>
+    I would add tests before the first live event: unit tests for request
+    validation and state transitions, fakes for Firebase boundaries, and UI
+    tests for the flows a listener and entertainer use most. I would also design
+    the empty, loading, error, and offline states before polishing the happy
+    path.
+  </p>
+  <p>
+    Most importantly, I would treat the first release as a learning loop, not a
+    final verdict. The original app proved that people wanted the experience. A
+    stronger architecture would have made it safer to keep learning from them.
+  </p>
+  <p>
+    Max is no longer here to see where that encouragement led. His belief in me
+    had a profound impact on my life and the developer I became. I carry that
+    belief into the work I do today.
+  </p>
 </CaseStudyLayout>
 
 <style>
