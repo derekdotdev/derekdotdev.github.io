@@ -50,12 +50,32 @@ const description =
   <h2>Make the technical path repeatable.</h2>
   <p>
     Shortly after being promoted from junior engineer to L1, I was entrusted
-    with substantial autonomy to shape this solution. I recommended Jetpack
-    Compose, layered architecture, and explicit use-case boundaries for the
-    pairing wizards. We started with one vehicle, where I owned the Android UI
-    and architecture while partnering with an integrator responsible for much
-    of the C++ implementation. I also worked across the JNI boundary when the
-    feature required it.
+    with substantial autonomy to shape this solution. I had built one Spring
+    application by choice in college, but Android was a new domain. Most of my
+    deeper learning happened outside coursework; classroom projects often
+    stopped at CLI applications. My first eight months at Tomahawk were spent
+    inheriting a Redwood.js customer
+    portal built with React and TypeScript, then carrying it from infancy
+    through production deployment in AWS GovCloud. I then spent roughly six
+    months actively contributing to Kinesis while building familiarity with
+    its codebase before taking on the pairing work.
+  </p>
+  <p>
+    The first hurdle was not the screen itself. Each pairing wizard was a
+    separate Activity defined in the vehicle’s plugin and launched by Kinesis
+    through an explicit Intent, so I first had to establish how a plugin could
+    advertise that a wizard existed and how Kinesis could launch it on demand.
+    We started with one vehicle, where I owned the Android UI and architecture,
+    partnered with an integrator who
+    handled much of the C++ integration with the vehicle itself, and crossed
+    the JNI boundary when the feature required it.
+  </p>
+  <p>
+    Once that foundation was working, I drew on established Android patterns,
+    including Philipp Lackner’s educational content and public examples, and
+    adapted those techniques to our workflows. The first wizard took about
+    nine months; after the pattern was established, the next three took only a
+    few weeks each.
   </p>
   <p>
     The first pairing wizard turned those disconnected steps into one guided
@@ -72,16 +92,8 @@ const description =
     found, the plugin created a node that Kinesis could display and control.
     When a connection needed to be retried, the operator could start the
     process on demand instead of reconstructing the setup from memory or
-    repeating manual commands.
-  </p>
-  <p>
-    The process is repeatable by design. We can pair with a vehicle in a safe
-    setting, verify the configuration, and save it before the equipment is
-    needed. The first pairing may take time depending on the platform, but a
-    saved configuration can be recalled in moments so the vehicle can be
-    connected and launched when timing matters.
-    In practice, that means setting up the kit ahead of time, then connecting
-    to it quickly when it is needed.
+    repeating manual commands. In practice, that means setting up the kit
+    ahead of time, then connecting to it quickly when it is needed.
   </p>
 
   <p class="eyebrow">The platform model</p>
@@ -94,8 +106,17 @@ const description =
     which users could launch when needed.
   </p>
   <p>
-    That model kept vendor-specific pairing logic with the plugin while giving
-    the main application a consistent way to discover and present it. The
+    Building that dynamic list was a learning experience of its own. At the
+    time, I had not yet worked with Room, was still developing my fluency with
+    Kotlin Flows, and had not established Hilt in the main application. I used
+    a static registry with an observer-based pub/sub pattern to notify Kinesis
+    when new pairing Activities were available. It solved the immediate
+    problem, but it remains technical debt—an honest reminder that a working
+    first step is not always the final architecture.
+  </p>
+  <p>
+    That model kept vendor-specific pairing logic within each plugin while
+    giving the main application a consistent way to discover and present it. The
     result was an extensible integration point without forcing operators to
     understand how each vehicle worked internally.
   </p>
@@ -109,6 +130,16 @@ const description =
     most important work to the user.
   </p>
   <p>
+    I learned a great deal while building the first wizard, and even more when
+    I revisited the code later. I found public mutable properties, unnecessary{" "}
+    <code>suspend</code> functions, long methods carrying too many
+    responsibilities, and domain use cases that did little more than wrap a
+    repository. Seeing those patterns clearly today is a reminder of how much
+    my engineering judgment has grown. I’m grateful for that perspective: the
+    distance between the first implementation and how I would build it today is
+    one of the clearest measures of how far I’ve come.
+  </p>
+  <p>
     I was also fortunate to have senior engineers I could lean on when I got
     stuck. They reinforced that the only silly question is the one you do not
     ask, and taught me that every engineer is still learning—regardless of
@@ -120,7 +151,10 @@ const description =
     The pairing wizards also became my first production opportunity to establish
     Jetpack Compose and ViewModel patterns. They gave me a focused workflow in
     which to prove a more modern UI architecture before helping move the wider
-    Kinesis application forward.
+    Kinesis application forward. More importantly, they taught me that good
+    engineering is iterative: start with a real user problem, establish a
+    repeatable pattern, and make each subsequent feature easier to build than
+    the last.
   </p>
 </CaseStudyLayout>
 
