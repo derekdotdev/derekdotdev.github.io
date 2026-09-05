@@ -39,6 +39,8 @@ jobs:
         run: npm run test:e2e
       - name: Build site
         run: npm run build
+      - name: Check internal links
+        run: npm run check:links
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
