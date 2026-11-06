@@ -46,6 +46,7 @@ The active site lives entirely in `src/` and is organized from high-level compos
 - Edit professional-impact and approach cards in `src/data/profile.ts`.
 - Edit section copy in its matching component under `src/components/sections/`.
 - Change colors through the dark and light design tokens at the top of `src/styles/global.css`.
-- Replace the resume at `src/assets/derek-dileo-resume.pdf` without changing component links.
+- Add the latest resume under `src/assets/`, then update its import in `src/pages/index.astro`
+  and download filename in `src/components/ResumeLink.astro`.
 
 The site is deployed to GitHub Pages by `.github/workflows/deploy.yml` whenever `main` changes.
